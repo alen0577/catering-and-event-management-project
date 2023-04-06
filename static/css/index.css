@@ -1,0 +1,37 @@
+
+
+div.header{
+    text-align: center;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+    margin-top: 10px;
+}
+section#section2{
+    
+    color: rgb(5, 12, 69);
+    font-family: Arial, Helvetica, sans-serif;
+    
+    
+}
+h3.subtitle{
+    font-family: cursive;
+}
+p{
+    color: rgb(111, 110, 110);
+}
+
+section#section3{
+
+    margin-top: 70px;
+    background-color: rgb(5, 12, 69);
+    color: white;
+    
+
+
+}
+section#section3 h4.title{
+    color: white;
+    margin-top: 150px;
+}

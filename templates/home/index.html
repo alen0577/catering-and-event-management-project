@@ -1,0 +1,148 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+
+{% block title %}
+Royal Events-Home
+{% endblock %}
+
+
+
+
+
+
+
+{% block body %}
+
+
+
+
+<section id="section1">
+
+    
+
+    {% include 'home/navbar.html' %}
+
+    <div class="row">
+        <div class="col-12">
+
+            <img src="{% static 'images/header1.jpg' %}" class="img-fluid" alt="..." style="width: 100%;margin-top: 130px;">
+
+        </div>
+    </div>
+
+    
+    
+        
+    
+</section>
+
+
+
+<section id="section2">
+
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3 class=" title text-center" style="margin-top: 45px;"><b>ROYAL EVENTS</b></h3>
+                <h3 class="subtitle text-center">Best Catering and Event Management Services</h3><br>
+                <h1 class="text-center">We Specialize in Weddings, Events and Parties.</h1>
+                <p class="des text-center">With 10+ years of experience, we promise you... <br>
+                    fresh food with top-notch service, sophisticated style, 
+                    affordable price and perfect design for your most significant moments...
+                </p>
+ 
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col-lg-6">
+                <h3 class="text-center">Our passion is stirred by the colors,<br>
+                    flavors and exotic textures
+                </h3><br>
+                <h4 class="text-center">This is our <b> Passion</b></h4>
+                <p class="text-center">We choose this because of passion, not for income</p>
+                <h4 class="text-center">We serve only <b>Fresh</b></h4>
+                <p class="text-center">Daily we provide fresh foods, because we want a healthy generation</p>
+                <h4 class="text-center">Never compromise <b>Quality</b></h4>
+                <p class="text-center">We believe that good food brings people together</p>
+
+            </div>
+            <div class="col-lg-6">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-12">
+                            <img src="{% static 'images/img1.jpg' %}" class="img-fluid rounded" alt="..." style="width: 100%;">
+                        </div>  
+                    </div>
+                </div>   
+            </div>
+        </div>
+    </div>   
+
+</section>
+
+<section id="section3">
+
+   <div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h4 class="title text-center">Enjoy your special moments with our <b>Fresh</b> and <b>Delicious</b> recepies..!</h4>
+        </div>
+    </div>
+   </div>
+
+   <div class="container">
+    <div class="row">
+        <div class="col-12"><br><br>
+
+
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="{% static 'images/img.jpg' %}" class="card-img-top" alt="..." style="height: 250px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="{% static 'images/img1.jpg' %}" class="card-img-top" alt="..."  style="height: 250px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card h-100">
+                    <img src="{% static 'images/img2.jpg' %}" class="card-img-top" alt="..."  style="height: 250px;">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+                    </div>
+                    <div class="card-footer">
+                      <small class="text-body-secondary">Last updated 3 mins ago</small>
+                    </div>
+                  </div>
+                </div>
+              </div><br><br>
+
+
+
+        </div>
+    </div>
+   </div>
+
+  
+</section>
+
+{% endblock %}

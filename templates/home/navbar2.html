@@ -1,0 +1,69 @@
+{% load static %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+
+
+
+      <nav class="navbar navbar-expand-lg fixed-top"data-bs-theme="dark" style="background-color: rgb(5, 12, 69); ;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Food Items</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Events</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Menu</a>
+                  </li>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Register</a>
+              </li>
+              
+              
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" style="background-color: white; color:rgb(78, 76, 224);" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn" style="background-color: white; color:rgb(78, 76, 224);" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+    </nav>
+    
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+<style>
+
+button.btn:hover{
+    background-color:rgb(6, 13, 70) ;
+    color: white;
+}
+    
+    
+</style>
+
+
