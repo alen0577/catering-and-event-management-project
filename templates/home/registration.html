@@ -1,0 +1,157 @@
+
+<!-- modal for registration -->
+
+
+<div class="modal fade" id="registrationmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="container">
+            <h1 class="header" style="text-align: center;">SIGN UP</h1>
+            <fieldset>
+            <form method="post" action="{% url 'usercreate' %}" class="was-validated"  target="_self" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset>
+                    <div class="form-group">
+                        <label for="firstname">First Name:</label>
+                        <input type="text" class="form-control" id="fname" placeholder="Enter first name" name="fname" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                    
+                      <div class="form-group">
+                        <label for="lasttname">Last Name:</label>
+                        <input type="text" class="form-control" id="lname" placeholder="Enter last name" name="lname" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="lasttname">Username:</label>
+                        <input type="text" class="form-control" id="lname" placeholder="Enter username" name="uname" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                      <div class="form-group">
+                        <label for="firstname">Address</label>
+                        <textarea rows="5" cols="10" class="form-control" id="address" placeholder="Enter address" name="address" required></textarea>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                      <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" class="form-control" id="lname" placeholder="Enter email id" name="email" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                    
+                      <div class="form-group">
+                        <label>Mobile number:</label>
+                        <input type="text" class="form-control"  placeholder="Enter mobile number" name="number"  required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                      <div class="form-group">
+                        <label>Age:</label>
+                        <input type="number" class="form-control" placeholder="Enter age" name="age" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                      <div class="form-group">
+                        <label>State:</label>
+                        <input type="text" class="form-control"  placeholder="Enter  State" name="state" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                      <div class="form-group">
+                        <label>Country:</label>
+                        <input type="text" class="form-control"  placeholder="Enter  Country" name="country" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                      <div class="form-group">
+                        <label>Pincode:</label>
+                        <input type="text" class="form-control"  placeholder="Enter  Pincode" name="pin" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                      </div>
+                      <div class="form-group">
+                        <label>Gender</label><br>
+                        <input type="text" class="form-control"  placeholder="Enter Gender" name="gender" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                        
+                      </div>
+                    
+                    
+                    
+                </fieldset>
+        
+                <div class="form-group">
+                    <label>Upload Photo: </label>
+                    <input type='file' name="photo"  accept="image/*">
+                    
+                </div>
+                <div class="form-group">
+                    <label>Password:</label>
+                    <input type="password" class="form-control"  placeholder="Enter password" name="password" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                  </div>
+                  <div class="form-group">
+                    <label>Confirm Password:</label>
+                    <input type="password" class="form-control"  placeholder="Confirm password" name="cpassword" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                  </div><br>
+    
+                <input type='submit' style="background-color: rgb(0, 0, 0); color: rgb(246,110,19);margin-bottom: 5px;" value='REGISTER'>
+                <input type='reset' style="background-color: rgb(0, 0, 0); color: rgb(246,110,19);margin-bottom: 5px;" value='RESET'> <br>
+            </fieldset><br>
+            </form>
+        
+
+          
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-secondary" data-bs-dismiss="modal" style=" color: white;" type="button"><a href="#" style="text-decoration: none;color: rgb(0, 0, 0);">Back</a> </button>
+          <button class="btn btn-outline-secondary" style=" color: white;" type="button"><a href="#" style="text-decoration: none;color: rgb(0, 0, 0);">Save changes</a> </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+<style>
+    div.modal{
+    font-family: Arial, Helvetica, sans-serif;
+    
+    
+}
+div.modal a{
+    text-decoration: none;
+    color: rgb(246, 110, 19);
+
+}
+#a02{
+    
+    padding-left: 160px;
+}
+div.modal#signup div.modal-body{
+    padding: 10px;
+}
+div.footer{
+    height: 150px;
+    background-color: rgb(251, 251, 251);
+    color: rgb(246, 110, 19);
+}
+</style>

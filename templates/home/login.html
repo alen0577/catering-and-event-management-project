@@ -1,0 +1,79 @@
+
+<!-- modal for login -->
+
+
+
+<div class="modal fade" id="loginmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <form method="post" action="{% url 'login' %}" target="_self" class="was-validated">
+            {% csrf_token %}
+            <div class="container">
+                <h1 class="header" style="text-align: center;">SIGN IN</h1>
+                <div class="form-group">
+                    <label for="uname">Username:</label>
+                    <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                  </div>
+                
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                  </div>
+                  <div class="form-group form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" name="remember" required> Please check here.
+                      <div class="valid-feedback">Valid.</div>
+                      <div class="invalid-feedback">Check this checkbox to continue.</div>
+                    </label>
+                  </div>
+                  <input type='submit' style="background-color: rgb(0, 0, 0); color: rgb(246,110,19);margin-bottom: 5px;" value='SIGN IN'>
+                  <br><br>
+                  <a href="#" id="a01">Forget Password?</a>
+                  <a data-bs-toggle="modal" data-bs-target="#signup" href="#" id="a02">Create New Account</a>
+                  
+      
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-secondary" data-bs-dismiss="modal" style=" color: white;" type="button"><a href="#" style="text-decoration: none;color: rgb(0, 0, 0);">Back</a> </button>
+            <button class="btn btn-outline-secondary" style=" color: white;" type="button"><a href="#" style="text-decoration: none;color: rgb(0, 0, 0);">Save changes</a> </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+    div.modal{
+    font-family: Arial, Helvetica, sans-serif;
+    
+    
+}
+div.modal a{
+    text-decoration: none;
+    color: rgb(246, 110, 19);
+
+}
+#a02{
+    
+    padding-left: 160px;
+}
+div.modal#signup div.modal-body{
+    padding: 10px;
+}
+div.footer{
+    height: 150px;
+    background-color: rgb(251, 251, 251);
+    color: rgb(246, 110, 19);
+}
+    </style>
