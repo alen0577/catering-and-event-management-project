@@ -2,7 +2,7 @@
 <!-- modal for registration -->
 
 
-<div class="modal fade" id="registrationmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="registrationmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: rgb(5, 12, 69);">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -14,7 +14,7 @@
           <div class="container">
             <h1 class="header" style="text-align: center;">SIGN UP</h1>
             <fieldset>
-            <form method="post" action="{% url 'usercreate' %}" class="was-validated"  target="_self" enctype="multipart/form-data">
+            <form method="post" action="" class="was-validated"  target="_self" enctype="multipart/form-data">
                 {% csrf_token %}
                 <fieldset>
                     <div class="form-group">
@@ -109,8 +109,8 @@
                     <div class="invalid-feedback">Please fill out this field.</div>
                   </div><br>
     
-                <input type='submit' style="background-color: rgb(0, 0, 0); color: rgb(246,110,19);margin-bottom: 5px;" value='REGISTER'>
-                <input type='reset' style="background-color: rgb(0, 0, 0); color: rgb(246,110,19);margin-bottom: 5px;" value='RESET'> <br>
+                <input type='submit' style="background-color: rgb(5, 12, 69); color: rgb(255, 255, 255);margin-bottom: 5px;" value='REGISTER'>
+                <input type='reset' style="background-color: rgb(5, 12, 69); color: rgb(255, 255, 255);margin-bottom: 5px;" value='RESET'> <br>
             </fieldset><br>
             </form>
         
@@ -118,8 +118,7 @@
           
         </div>
         <div class="modal-footer">
-          <button class="btn btn-outline-secondary" data-bs-dismiss="modal" style=" color: white;" type="button"><a href="#" style="text-decoration: none;color: rgb(0, 0, 0);">Back</a> </button>
-          <button class="btn btn-outline-secondary" style=" color: white;" type="button"><a href="#" style="text-decoration: none;color: rgb(0, 0, 0);">Save changes</a> </button>
+          <button class="btn" data-bs-dismiss="modal" style="background-color: rgb(5, 12, 69);color: white;" type="button"><a href="#" style="text-decoration: none;color: rgb(255, 255, 255);">Back</a> </button>
 
         </div>
       </div>

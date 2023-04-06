@@ -3,7 +3,7 @@
 
 
 
-<div class="modal fade" id="loginmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="loginmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: rgb(5, 12, 69);">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
@@ -12,7 +12,7 @@
         </div>
         <div class="modal-body">
 
-          <form method="post" action="{% url 'login' %}" target="_self" class="was-validated">
+          <form method="post" action="" target="_self" class="was-validated">
             {% csrf_token %}
             <div class="container">
                 <h1 class="header" style="text-align: center;">SIGN IN</h1>
@@ -36,44 +36,35 @@
                       <div class="invalid-feedback">Check this checkbox to continue.</div>
                     </label>
                   </div>
-                  <input type='submit' style="background-color: rgb(0, 0, 0); color: rgb(246,110,19);margin-bottom: 5px;" value='SIGN IN'>
+                  <input type='submit' style="background-color: rgb(5, 12, 69);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='SIGN IN'>
                   <br><br>
-                  <a href="#" id="a01">Forget Password?</a>
-                  <a data-bs-toggle="modal" data-bs-target="#signup" href="#" id="a02">Create New Account</a>
+                  
+                  <a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="#" id="a02" style="color: rgb(5, 12, 69);margin-left: 130px;">Create New Account</a>
                   
       
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-outline-secondary" data-bs-dismiss="modal" style=" color: white;" type="button"><a href="#" style="text-decoration: none;color: rgb(0, 0, 0);">Back</a> </button>
-            <button class="btn btn-outline-secondary" style=" color: white;" type="button"><a href="#" style="text-decoration: none;color: rgb(0, 0, 0);">Save changes</a> </button>
+            <button class="btn" data-bs-dismiss="modal" style=" color: white; background-color: rgb(5, 12, 69);" type="button"><a href="#" style="text-decoration: none;color: rgb(255, 255, 255);">Back</a> </button>
 
           </div>
         </div>
       </div>
     </div>
-    <style>
-    div.modal{
+
+
+<style>
+
+div.modal{
+
     font-family: Arial, Helvetica, sans-serif;
     
     
 }
-div.modal a{
-    text-decoration: none;
-    color: rgb(246, 110, 19);
 
-}
-#a02{
-    
-    padding-left: 160px;
-}
 div.modal#signup div.modal-body{
     padding: 10px;
 }
-div.footer{
-    height: 150px;
-    background-color: rgb(251, 251, 251);
-    color: rgb(246, 110, 19);
-}
+
     </style>
