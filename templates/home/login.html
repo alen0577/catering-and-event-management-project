@@ -12,10 +12,10 @@
         </div>
         <div class="modal-body">
 
-          <form method="post" action="" target="_self" class="was-validated">
+          <form method="post" action="{% url 'loginuser' %}" target="_self" class="was-validated">
             {% csrf_token %}
             <div class="container">
-                <h1 class="header" style="text-align: center;">SIGN IN</h1>
+                <h1 class="header" style="text-align: center;">LOG IN</h1>
                 <div class="form-group">
                     <label for="uname">Username:</label>
                     <input type="text" class="form-control" id="uname" placeholder="Enter username" name="uname" required>
@@ -36,7 +36,7 @@
                       <div class="invalid-feedback">Check this checkbox to continue.</div>
                     </label>
                   </div>
-                  <input type='submit' style="background-color: rgb(5, 12, 69);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='SIGN IN'>
+                  <input type='submit' style="background-color: rgb(5, 12, 69);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='LOGIN'>
                   <br><br>
                   
                   <a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="#" id="a02" style="color: rgb(5, 12, 69);margin-left: 130px;">Create New Account</a>

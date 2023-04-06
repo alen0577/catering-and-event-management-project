@@ -153,4 +153,36 @@ Royal Events-Home
 
 {% include 'home/login.html' %}
 {% include 'home/registration.html' %}
+
+{% for message in messages %}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+  {% if message.tags == 'info' %}
+  <!-- <script>
+    var m="{{message}}";
+    swal("Blocked..!",m, "info")
+  </script> -->
+
+  <!-- modal show -->
+  <script>
+      $(document).ready(function() {
+          $("#loginmodal").modal('show');
+      });
+  </script>
+  
+
+  {% elif message.tags == 'error' %}
+  <script>
+    var m="{{message}}";
+    swal("Denied..!",m, "error")
+  </script>
+  
+
+  {% endif %}
+
+
+{% endfor %}
+
+
 {% endblock %}
