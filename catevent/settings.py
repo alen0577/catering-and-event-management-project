@@ -78,8 +78,16 @@ WSGI_APPLICATION = 'catevent.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'catevent',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        'OPTIONS': {
+        'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+        
     }
 }
 
@@ -132,3 +140,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#mail setup
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True                            #Transport Layer Security
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'alenantony32@gmail.com'  #from email id
+EMAIL_HOST_PASSWORD = 'gapewwnbvvbafmln'        #App Password

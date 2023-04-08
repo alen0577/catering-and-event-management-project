@@ -11,6 +11,45 @@ from django.views.decorators.cache import cache_control
 def index(request):
     return render(request,'home/index.html')
 
+def usercreate(request):
+    if request.method=='POST':
+        fname=request.POST['fname']
+        lname=request.POST['lname']
+        uname=request.POST['uname']
+        email=request.POST['email']
+        address=request.POST['address']
+        mobile=request.POST['number']
+        age=request.POST['age']
+        state=request.POST['state']
+        country=request.POST['country']
+        pincode=request.POST['pin']
+        gender=request.POST['gender']
+        photo=request.FILES.get('photo')
+        password1=request.POST['password']
+        password2=request.POST['cpassword']
+
+        if password1==password2:
+            if User.objects.filter(username=uname).exists():
+                messages.info(request,'Username already exists')
+                return redirect('index')   
+            elif User.objects.filter(email=email).exists():
+                messages.info(request,'Email already exists') 
+                return redirect('index')
+            else:
+                user=User.objects.create_user(first_name=fname,last_name=lname,username=uname,email=email,password=password1)
+                user.save()
+
+                data=User.objects.get(id=user.id)
+                ext_user_data=CustomerModel(address=address,mobile=mobile,age=age,state=state,country=country,
+                                            pincode=pincode,gender=gender,photo=photo,customer=data)
+                ext_user_data.save()
+                messages.success(request,'Profile Registered')
+                return redirect('index')
+        else:
+            messages.info(request,'Password is not matching')
+            return redirect('index')   
+
+
 
 def login(request):
     if request.user.is_authenticated:
