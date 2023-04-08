@@ -5,6 +5,8 @@ from django.contrib.auth.models import User,auth
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
+from . models import *
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -30,10 +32,10 @@ def usercreate(request):
 
         if password1==password2:
             if User.objects.filter(username=uname).exists():
-                messages.info(request,'Username already exists')
+                messages.error(request,'Username already exists')
                 return redirect('index')   
             elif User.objects.filter(email=email).exists():
-                messages.info(request,'Email already exists') 
+                messages.error(request,'Email already exists') 
                 return redirect('index')
             else:
                 user=User.objects.create_user(first_name=fname,last_name=lname,username=uname,email=email,password=password1)
@@ -44,9 +46,15 @@ def usercreate(request):
                                             pincode=pincode,gender=gender,photo=photo,customer=data)
                 ext_user_data.save()
                 messages.success(request,'Profile Registered')
+                subject = 'Welcome to ROYAL EVENTS!'
+                message = f'Hello {uname},\n\nThank you for registering on our website. \nYour username is {uname} and your password is {password1}. \nPlease keep this information safe and do not share it with anyone.\n\nBest regards,\nROYAL EVENTS'
+                from_email = 'alenantony32@gmail.com'
+                recipient_list = [email]
+                send_mail(subject, message, from_email, recipient_list)
+
                 return redirect('index')
         else:
-            messages.info(request,'Password is not matching')
+            messages.error(request,'Password is not matching')
             return redirect('index')   
 
 

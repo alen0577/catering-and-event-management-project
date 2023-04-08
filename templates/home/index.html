@@ -177,6 +177,13 @@ Royal Events-Home
     var m="{{message}}";
     swal("Denied..!",m, "error")
   </script>
+
+  {% else %}
+  
+  <script>
+    var m="{{message}}";
+    swal("Thankyou..!",m, "success")
+  </script>
   
 
   {% endif %}
