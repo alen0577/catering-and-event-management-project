@@ -11,7 +11,10 @@ from django.core.mail import send_mail
 # Create your views here.
 
 def index(request):
-    return render(request,'home/index.html')
+    product=ProductModel.objects.all()
+    category=CategoryModel.objects.all()
+    context={'product':product, 'category':category}
+    return render(request,'home/index.html',context)
 
 def usercreate(request):
     if request.method=='POST':
@@ -47,7 +50,7 @@ def usercreate(request):
                 ext_user_data.save()
                 messages.success(request,'Profile Registered')
                 subject = 'Welcome to ROYAL EVENTS!'
-                message = f'Hello {uname},\n\nThank you for registering on our website. \nYour username is {uname} and your password is {password1}. \nPlease keep this information safe and do not share it with anyone.\n\nBest regards,\nROYAL EVENTS'
+                message = f'Hello {uname},\n\nThank you for registering on our website. \nLogin Details \nUsername:  {uname} \nPassword: {password1} \n\nPlease keep this information safe and do not share it with anyone.\n\nBest regards,\nROYAL EVENTS\nCatering and Event Management Company.'
                 from_email = 'alenantony32@gmail.com'
                 recipient_list = [email]
                 send_mail(subject, message, from_email, recipient_list)
@@ -65,7 +68,8 @@ def login(request):
     else:
         messages.info(request,'Please login to access this page')
         return HttpResponseRedirect('/')
-    
+
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)    
 def loginuser(request):
         if request.method=='POST':
             username=request.POST['uname']  
