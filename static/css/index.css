@@ -35,9 +35,61 @@ section#section3 h4.title{
     color: white;
     margin-top: 150px;
 }
+section#section3 input.btn{
+
+    background-color: rgb(5, 12, 69);
+    color: white;
+    margin-bottom: 10px;
+
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(15, 248, 224);
+}
+section#section3 input.btn:hover{
+    
+    background-color: white;
+    color: rgb(5, 12, 69);
+    
+}
 
 section#section4 h4.title{
     color: rgb(5, 12, 69);
-    margin-top: 150px;
+    margin-top: 100px;
+}
+section#section4{
+    
+    color: rgb(5, 12, 69);
+    font-family: Arial, Helvetica, sans-serif;
+    
+    
+}
+section#section4 input.btn{
+
+    background-color: rgb(5, 12, 69);
+    color: white;
+    margin-bottom: 10px;
+
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(15, 248, 224);
+}
+section#section4 input.btn:hover{
+    
+    background-color: white;
+    color: rgb(5, 12, 69);
+    
+}
+
+section#section5{
+
+    margin-top: 70px;
+    background-color: rgb(5, 12, 69);
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    
+    
+
+
 }
 

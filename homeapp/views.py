@@ -11,7 +11,7 @@ from django.core.mail import send_mail
 # Create your views here.
 
 def index(request):
-    product=ProductModel.objects.all()
+    product=ProductModel.objects.all()[:6]
     category=CategoryModel.objects.all()
     context={'product':product, 'category':category}
     return render(request,'home/index.html',context)
