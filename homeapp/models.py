@@ -36,3 +36,9 @@ class ProductModel(models.Model):
 
     def __str__(self):
         return self.pname
+    
+
+class CartModel(models.Model):
+    user=models.ForeignKey(CustomerModel,on_delete=models.CASCADE,null=True)
+    product=models.ForeignKey(ProductModel,on_delete=models.CASCADE,null=True)
+    quantity = models.IntegerField(default=1)  

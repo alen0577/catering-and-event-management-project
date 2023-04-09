@@ -1,0 +1,70 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+Cart
+{% endblock title %}
+
+
+{% block body %}
+{% load static %}
+
+<div class="nav fixed-top" style="background-color: rgb(5, 12, 69);;">
+    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>      
+</div>
+
+
+
+
+<div class="container mt-5" >
+    <h3 class="alert  text-center mb-5" style="margin-top: 150px; background-color: rgb(5, 12, 69);color: white;">
+        CART DETAILS
+    </h3>
+    <div class="row">
+        <div class="col-sm-10">
+            <table class="table  table-hover text-center " style="background-color: rgb(171, 180, 180);color: rgb(5, 12, 69);">
+                <thead>
+                    <tr>
+                        <th>NAME</th>
+                        <th>PRICE</th>
+                        <th>CATEGORY</th>
+                        <th>IMAGE</th>
+                        <th>ACTION</th>
+                        
+                        
+                    </tr>
+                </thead>
+                {% for p in cartitems %}
+                <tbody>
+                    
+                    <tr>
+                        <td>{{ p.product.pname}}</td>
+                        <td>{{ p.product.pprice}}</td>
+                        <td>{{ p.product.pcat.category_name}}</td>  
+                        <td>
+                            {% if p.product.pimg %}
+                            <img src="{{ p.product.pimg.url }}" alt="" style="width: 200px;"></td>
+                            {% endif %}   
+                        <td>
+                            <a href="#"><button>Buy Now</button></a>
+                            <a href="{% url 'deleteitem' p.id %}"><button>Delete</button></a>
+                        </td>
+                        
+                    </tr>
+                    
+                </tbody> 
+                {% endfor %}
+        </div>
+    </div>
+    
+</div>
+
+
+
+<style>
+.table{
+    width: 120%;
+}
+</style>
+
+
+{% endblock %}

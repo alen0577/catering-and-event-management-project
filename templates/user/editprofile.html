@@ -1,0 +1,50 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+Edit Profile
+{% endblock title %}
+
+{% block body %}
+{% load static %}
+
+<div class="nav fixed-top" style="background-color: rgb(5, 12, 69);;">
+    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
+    
+</div>
+
+<h1 class="text-center" style="color: rgb(5, 12, 69);margin-top: 150px;">Edit Profile</h1>
+
+<div class="container" style="border-radius: 10px; width:50%;background-color: rgb(225, 231, 229);">
+   <form action="{% url 'editdetails' edit.id %}" method="post" enctype="multipart/form-data" class="form pt-5 pb-5" style="width: 50%;margin-left: 25%;">
+       {% csrf_token %}
+
+       <input type="text" name="first_name" class="form-control"value="{{user.first_name}}" placeholder="First Name"><br>
+       <input type="text" name="last_name"class="form-control" value="{{user.last_name}}" placeholder="Last Name"><br>
+       <input type="text" name="username" class="form-control" value="{{user.username}}" placeholder="Username"><br>
+       <input type="email" name="email" class="form-control" value="{{user.email}}" placeholder="Email"><br>
+       <input type="text" name="gender" class="form-control" value="{{edit.gender}}" placeholder="Gender"><br>
+       <input type="text" name="age" class="form-control" value="{{edit.age}}" placeholder="Age"><br>
+       <input type="text" name="state" class="form-control" value="{{edit.state}}" placeholder="state"><br>
+       <input type="text" name="country" class="form-control" value="{{edit.country}}" placeholder="country"><br>
+       <input type="text" name="pincode" class="form-control" value="{{edit.pincode}}" placeholder="pincode"><br>
+       <input type="text" name="number" class="form-control" value="{{edit.mobile}}" placeholder="Mobile Number"><br>
+       <input type="text" name="address" class="form-control" value="{{edit.address}}" placeholder="Address"><br>
+       <label class="form-control">Profile Picture</label><br>
+       {% if edit.photo %}
+            <img id="a1" src="{{edit.photo.url}}" style="width: 150px;" alt=""><br>
+            <input type="file" name="files" accept="image/*" value="{{old}}"><br><br>
+            {% else %}
+            <img src="{% static 'default.png' %}" style="width: 150px;" alt=""><br><br>
+       <input type="file" name="image" class="form-control" accept="image/*"><br>
+       {% endif %}
+       
+
+        
+       
+       
+       <button type="submit" class="btn" style="margin-left: 40%;background-color: rgb(5, 12, 69);color: white;">Update</button>
+       <br><br>
+       
+   </form>
+</div>
+{% endblock %}

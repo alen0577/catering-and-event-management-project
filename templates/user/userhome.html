@@ -25,7 +25,7 @@ Royal Events-User_Home
     <div class="container">
       <div class="row">
           <div class="col-12">
-              <h4 class="title text-center">Enjoy your special moments with our <b>Fresh</b> and <b>Delicious</b> recepies..!</h4>
+              <h4 class="title text-center">Buy and enjoy our <b>Fresh</b> and <b>Delicious</b> recepies..! now</h4>
           </div>
       </div>
     </div>
@@ -43,7 +43,12 @@ Royal Events-User_Home
               <h5 class="card-title"><b>{{i.pname}}</b></h5>
               <p class="card-text">{{i.pdes|truncatewords:6}}</p>
               <p class="card-text">{{i.pprice}}/-</p>
-              <a href="/login" class="btn btn-dark" style="background-color: rgb(5, 12, 69);color: white;">Add to Cart</a>
+              {% if i.pqty  %}
+              <a href="#" class="btn btn-dark" style="background-color: rgb(5, 12, 69);color: white;">Add to Cart</a>
+              {% else %}
+              <a href="#" class="btn btn-dark" style="background-color: rgb(5, 12, 69);color: white;">Not Available</a>
+              {% endif %}
+
             </div>
           </div>
   
@@ -134,7 +139,7 @@ Royal Events-User_Home
   
   <script>
     var m="{{message}}";
-    swal("Thankyou..!",m, "success")
+    swal("Welcome..!",m, "success")
   </script>
   
 

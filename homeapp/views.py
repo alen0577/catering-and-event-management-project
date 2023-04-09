@@ -80,11 +80,11 @@ def loginuser(request):
             if user is not None:
                 if user.is_staff:
                     auth.login(request,user)
-                    messages.success(request,'Welcome, you are logged in')
+                    messages.success(request,'Success, you are logged in')
                     return redirect('adminhome')
                 else:
                     auth.login(request,user)
-                    messages.success(request,'Welcome, you are logged in')  
+                    messages.success(request,'Success, you are logged in')  
                     return redirect('userhome')  
 
 
@@ -104,6 +104,9 @@ def logout(request):
 def adminhome(request):
     return render(request,'manager/adminhome.html')
 
+
+#User related functions
+
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def userhome(request):
@@ -117,3 +120,63 @@ def userhome(request):
     
     context={'product':product}
     return render(request,'user/userhome.html',context)
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def profile(request):
+    customer=CustomerModel.objects.get(customer=request.user)
+    return render(request,'user/profile.html',{'customer':customer})
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def editpage(request):
+    customer=CustomerModel.objects.get(customer=request.user)
+    context={'edit': customer}
+    return render(request,'user/editprofile.html',context)
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def editdetails(request,pk):
+    if request.method=='POST':
+        
+        customer=CustomerModel.objects.get(id=pk)
+        user_id=customer.customer.id
+        user=User.objects.get(id=user_id)
+        user.first_name=request.POST.get('first_name')
+        user.last_name=request.POST.get('last_name')
+        user.username=request.POST.get('username')
+        user.email=request.POST.get('email')
+        customer.gender=request.POST.get('gender')
+        customer.state=request.POST.get('state')
+        customer.country=request.POST.get('country')
+        customer.pincode=request.POST.get('pincode')
+        customer.age=request.POST.get('age')
+        customer.mobile=request.POST.get('number')
+        customer.address=request.POST.get('address')
+        old=customer.photo
+        new=request.FILES.get('files')
+        if old != None and new==None:
+            customer.photo=old
+        else:
+            customer.photo=new 
+          
+     
+
+        customer.save()
+        user.save()
+        messages.success(request,'Profile Updated')
+        
+        
+        return redirect('profile')
+
+def cart(request):
+    user_id=request.user.id
+    user1=CustomerModel.objects.get(customer=user_id)
+    cartitems=CartModel.objects.filter(user=user1)
+    context={'cartitems': cartitems}
+    return render(request,'user/cart.html',context)
+
+def deleteitem(request,pk):
+    cartitem=CartModel.objects.get(id=pk)
+    cartitem.delete()
+    return redirect('cart')

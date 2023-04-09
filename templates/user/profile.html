@@ -1,0 +1,80 @@
+{% extends 'user/base.html' %}
+
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block body %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+
+
+
+<div class="card">
+    {% if customer.photo %}
+    <img src="{{customer.photo.url}}" alt="" style="width:100%">
+    {% else %}
+    <img src="{% static 'images/default.png' %}" alt="" style="width: 100%;">
+    {% endif %}
+    <h1>{{user.first_name}}  {{user.last_name}}</h1>
+    <p class="title">Username: {{user.username}}</p>
+    <p>Customer Id: {{customer.id}}</p>
+    <p>Address: {{customer.address}}</p>
+    <p>Age: {{customer.age}}</p>
+    <p>State: {{customer.state}} </p>
+    <p>Country: {{customer.country}} </p>
+    <p>Pincode: {{customer.pincode}} </p>
+    <p>Gender: {{customer.gender}}</p>
+    <p>Email Id: {{user.email}}</p>
+    
+
+    
+    <p><button>Contact: {{customer.mobile}}</button></p>
+    <a href="{% url 'editpage' %}">Edit Profile</a>
+  </div>
+
+  <center><a href="{% url 'userhome' %}"><input class="btn"  type="submit" value="Back to Home"></a></center>
+
+
+
+
+{% for message in messages %}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+  {% if message.tags == 'info' %}
+  <script>
+    var m="{{message}}";
+    swal("Blocked..!",m, "info")
+  </script>
+
+  <!-- modal show -->
+  <!-- <script>
+      $(document).ready(function() {
+          $("#loginmodal").modal('show');
+      });
+  </script> -->
+  
+
+  {% elif message.tags == 'error' %}
+  <script>
+    var m="{{message}}";
+    swal("Denied..!",m, "error")
+  </script>
+
+  {% else %}
+  
+  <script>
+    var m="{{message}}";
+    swal("Success..!",m, "success")
+  </script>
+  
+
+  {% endif %}
+
+
+{% endfor %}
+
+
+
+{% endblock %}
