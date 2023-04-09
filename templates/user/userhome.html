@@ -1,2 +1,196 @@
-<h1>Welcome user</h1>
-<a href="/logout">logout</a>
+{% extends 'user/base.html' %}
+{% load static %}
+
+
+{% block title %}
+Royal Events-User_Home
+{% endblock %}
+
+
+
+
+
+
+{% block body %}
+
+<section id="section1">
+    {% include 'user/navbar.html' %}
+</section>
+
+
+
+<section id="section3">
+
+
+    <div class="container">
+      <div class="row">
+          <div class="col-12">
+              <h4 class="title text-center">Enjoy your special moments with our <b>Fresh</b> and <b>Delicious</b> recepies..!</h4>
+          </div>
+      </div>
+    </div>
+  
+  
+    <div class="container">
+      <div class="row">
+        {% for i in product %}
+  
+        <div class="col-lg-4">
+  
+          <div class="card" style="width: 18rem;margin: 40px;color: rgb(5, 12, 69);padding: 2px;">
+            <img src="{{i.pimg.url}}" class="card-img-top" alt="..." style="height: 200px;">
+            <div class="card-body">
+              <h5 class="card-title"><b>{{i.pname}}</b></h5>
+              <p class="card-text">{{i.pdes|truncatewords:6}}</p>
+              <p class="card-text">{{i.pprice}}/-</p>
+              <a href="/login" class="btn btn-dark" style="background-color: rgb(5, 12, 69);color: white;">Add to Cart</a>
+            </div>
+          </div>
+  
+  
+        </div>
+        {% empty %}
+  
+        <p class="text-center" style="color:rgb(5, 12, 69);margin: 20px;font-size: xx-large;">Sorry...! no items found.</p>
+  
+        {% endfor %}
+        
+      </div>
+    </div>
+    
+  
+    
+</section>
+
+
+<section id="section5">
+    <div class="container" >
+      <div class="row">
+  
+  
+        <div class="col-lg-4" style="margin-top: 80px;margin-bottom: 50px;">
+  
+          <img src="{% static 'images/logo.png' %}" alt="" class="img-fluid" style="height: 250px;width: 300px;margin-left: 30px;">
+  
+        </div>
+  
+  
+        <div class="col-lg-4" style="margin-top: 80px;margin-bottom: 50px;">
+  
+          <div>
+            <p class="text-center" style="margin-top: 10px;color: white;"><b>Contact Us </b> <br>www.RoyalEvents.com <br>
+            insta:@royalevents <br>
+            Call:7902801967 <br>
+            Mail:royalevents@gmail.com <br>
+            </p>
+          </div>
+  
+        </div>
+  
+  
+        <div class="col-lg-4" style="margin-top: 80px;margin-bottom: 50px;">
+          <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d251502.02516988054!2d76.28649447344515!3d9.957309299244955!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d514abec6bf%3A0xbd582caa5844192!2sKochi%2C%20Kerala!5e0!3m2!1sen!2sin!4v1680984708082!5m2!1sen!2sin" width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+  
+        </div>
+  
+  
+      </div>
+    </div>
+  </section>
+  
+  
+
+
+
+
+
+{% for message in messages %}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+  {% if message.tags == 'info' %}
+  <script>
+    var m="{{message}}";
+    swal("Blocked..!",m, "info")
+  </script>
+
+  <!-- modal show -->
+  <!-- <script>
+      $(document).ready(function() {
+          $("#loginmodal").modal('show');
+      });
+  </script> -->
+  
+
+  {% elif message.tags == 'error' %}
+  <script>
+    var m="{{message}}";
+    swal("Denied..!",m, "error")
+  </script>
+
+  {% else %}
+  
+  <script>
+    var m="{{message}}";
+    swal("Thankyou..!",m, "success")
+  </script>
+  
+
+  {% endif %}
+
+
+{% endfor %}
+
+<style>
+
+section#section3{
+
+margin-top: 70px;
+background-color: rgb(255, 255, 255);
+color: rgb(5, 12, 69);
+
+
+
+}
+section#section3 h4.title{
+color: rgb(5, 12, 69);
+margin-top: 150px;
+}
+section#section3 input.btn{
+
+background-color: rgb(5, 12, 69);
+color: white;
+margin-bottom: 10px;
+
+border-radius: 10px;
+border-style: solid;
+border-color: rgb(15, 248, 224);
+}
+section#section3 input.btn:hover{
+
+background-color: white;
+color: rgb(5, 12, 69);
+
+}
+section#section5{
+
+margin-top: 70px;
+background-color: rgb(5, 12, 69);
+color: white;
+margin-top: 10px;
+margin-bottom: 10px;
+
+
+
+
+}
+
+
+
+
+
+</style>
+
+{% endblock %}

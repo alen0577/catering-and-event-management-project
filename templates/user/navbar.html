@@ -14,22 +14,19 @@
         <div class="offcanvas-body">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  <a class="nav-link active" aria-current="page" href="{% url 'userhome' %}">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#section2">About Us</a>
+                  <a class="nav-link" href="#section3">Food Items</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#section3">Fresh Food</a>
+                  <a class="nav-link" href="#">Book Event</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#section4">Event Packages</a>
+                  <a class="nav-link" href="#">Profile</a>
                 </li>
                 
                 {% if user.is_authenticated %}
-                <li class="nav-item">
-                  <a class="nav-link"  href="{% url 'userhome' %}">Login</a>
-                </li>
                 <li class="nav-item">
                   <a class="nav-link"  href="{% url 'logout' %}">Logout</a>
                 </li>
@@ -44,7 +41,10 @@
                 
                 
               </ul>
-              
+              <form class="d-flex" role="search">
+                <input class="form-control me-2" style="background-color: white; color:rgb(78, 76, 224);" type="search" placeholder="Search" aria-label="Search" name="q">
+                <button class="btn" style="background-color: white; color:rgb(78, 76, 224);" type="submit">Search</button>
+              </form>
         </div>
       </div>
     </div>

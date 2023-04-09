@@ -7,14 +7,15 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from . models import *
 from django.core.mail import send_mail
+from django.db.models import Q
 
 # Create your views here.
 
 def index(request):
     product=ProductModel.objects.all()[:6]
-    category=CategoryModel.objects.all()
-    context={'product':product, 'category':category}
+    context={'product':product}
     return render(request,'home/index.html',context)
+
 
 def usercreate(request):
     if request.method=='POST':
@@ -106,4 +107,13 @@ def adminhome(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def userhome(request):
-    return render(request,'user/userhome.html')
+    query = request.GET.get('q')
+
+    if query:
+        product = ProductModel.objects.filter(Q(pname__icontains=query) | Q(pdes__icontains=query))
+    else:
+        product=ProductModel.objects.all()
+        
+    
+    context={'product':product}
+    return render(request,'user/userhome.html',context)
