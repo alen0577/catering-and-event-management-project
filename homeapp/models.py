@@ -46,7 +46,7 @@ class CartModel(models.Model):
 
 class Eventpack(models.Model):
     name=models.CharField(max_length=200)
-    des=models.CharField(max_length=300)
+    des=models.TextField()
     price=models.IntegerField()  
 
     def __str__(self):
@@ -54,7 +54,7 @@ class Eventpack(models.Model):
 
 class Menupack(models.Model):
     name=models.CharField(max_length=200)
-    des=models.CharField(max_length=300)
+    des=models.TextField()
     price=models.IntegerField()  
 
     def __str__(self):

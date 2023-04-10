@@ -44,11 +44,11 @@ li a:hover:not(.active) {
      
     <li><a class="navbar-brand"><img class='img-fluid' src="{% static 'images/logo.png' %}" style="height: 100%;width: 150px;"></a></li>
     <li><a class="active" href="{% url 'adminhome' %}">Dashboard</a></li>
-    <li><a data-bs-toggle="modal" data-bs-target="#categorymodal" href="#news">Add Category</a></li>
+    <li><a data-bs-toggle="modal" data-bs-target="#categorymodal" href="#">Add Category</a></li>
     <li><a href="{% url 'product' %}">Add Food Products</a></li>
     <li><a href="{% url 'showprdt' %}">Food Products</a></li>
-    <li><a href="#about">Add Event Packs</a></li>
-    <li><a href="#about">Add Menu Packs</a></li>
+    <li><a data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Add Event Packs</a></li>
+    <li><a data-bs-toggle="modal" data-bs-target="#menumodal" href="#">Add Menu Packs</a></li>
     <li><a href="#about">Event Requests</a></li>
     <li><a href="{% url 'showusr' %}">Customers</a></li>
     <li><a href="{% url 'logout' %}">Logout</a></li>
