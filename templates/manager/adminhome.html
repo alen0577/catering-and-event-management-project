@@ -1,3 +1,84 @@
-<h1>Welcome Admin</h1>
+{% extends 'manager/base.html' %}
+{% load static %}
 
-<a href="/logout">logout</a>
+
+{% block title %}
+Royal Events-Admin_Home
+{% endblock %}
+
+
+
+
+
+
+{% block body %}
+<div class="row">
+    <div class="col-4">
+        {% include 'manager/navbar.html' %}
+
+
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-4">
+        {% include 'manager/category.html' %}
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+{% for message in messages %}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+  {% if message.tags == 'success' %}
+  <script>
+    var m="{{message}}";
+    swal("Success!",m, "success")
+  </script>
+
+  <!-- modal show -->
+  <!-- <script>
+      $(document).ready(function() {
+          $("#loginmodal").modal('show');
+      });
+  </script> -->
+  
+
+  {% elif message.tags == 'error' %}
+  <script>
+    var m="{{message}}";
+    swal("Denied..!",m, "error")
+  </script>
+
+  {% else %}
+  
+  <script>
+    var m="{{message}}";
+    swal("Welcome..!",m, "info")
+  </script>
+  
+
+  {% endif %}
+
+
+{% endfor %}
+
+
+<style>
+body{
+    background-color: rgb(21, 34, 81);
+}
+
+</style>
+
+
+{% endblock %}

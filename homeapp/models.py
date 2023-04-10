@@ -20,7 +20,7 @@ class CustomerModel(models.Model):
 
 class CategoryModel(models.Model):
     category_name=models.CharField(max_length=100,unique=True)
-    cat_img=models.ImageField(upload_to='images/',null=True,blank=True,unique=True)   
+       
 
     def __str__(self):
         return self.category_name 

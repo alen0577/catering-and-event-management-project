@@ -1,0 +1,83 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+
+{% block title %}
+Add Product
+{% endblock title %}
+
+
+{% block body %}
+
+<div class="nav fixed-top" style="background-color: rgb(5, 12, 69);;">
+    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
+    <a href="{% url 'adminhome' %}"><label type="submit"  class="label" style="background-color: rgb(5, 12, 69);color: white;margin-top: 35px; font-size:large;margin-left: 25px;">Back</label>
+    </a>      
+</div>
+
+
+<center>
+
+    <div class="container">
+        <h3 class="alert  text-center mb-5 w-50" style="color: rgb(255, 255, 255);">
+          <center>  Add Product</center>
+        </h3>
+            <form method="post" action="{% url 'addproduct' %}" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <input type="text" name="pname" class="form-control mt-3" placeholder="Enter Product Name">
+                <input type="text" name="pdes" class="form-control mt-3" placeholder="Enter Product Description">
+                <input type="number" name="pprice" class="form-control mt-3 mb-3" placeholder="Enter Price">
+                <input type="number" name="pqty" class="form-control mt-3 mb-3" placeholder="Enter Quantity">
+                <input type="file" name="pimg" class="form-control mt-3 mb-3">
+                
+    
+                <!-- <input type="date" name="joindate" class="form-control mt-3 mb-3" placeholder="Enter Joining Date"> -->
+    
+                <select class="form-control" name="select" id="qwerty">
+                    {% for i in category %}
+    
+                    <option value="{{ i.id }}">{{ i.category_name }}</option>
+    
+                    {% endfor %}
+                </select>
+    
+    
+                <button type="submit" class="btn btn-dark mt-3 " style="width: 650px;background-color: rgb(5, 12, 69); color: white;margin-bottom: 20px;">Submit</button>
+            </form>
+    </div>
+    
+
+
+
+
+
+
+
+</center>
+
+
+<style>
+
+    body{
+        background-color: rgb(21, 34, 81);
+    }
+
+    .container{
+        position: absolute;
+        top: 27%;
+    
+    }
+    input[type=text],[type=number],[type=file]{
+        width: 650px;
+    }
+    
+    #qwerty{
+        width: 650px;
+    }
+/* .btn{
+    width: 600px;
+} */
+
+
+</style>
+
+{% endblock %}

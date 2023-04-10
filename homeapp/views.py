@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import get_object_or_404, render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.contrib.auth.models import User,auth
@@ -80,11 +80,11 @@ def loginuser(request):
             if user is not None:
                 if user.is_staff:
                     auth.login(request,user)
-                    messages.success(request,'Success, you are logged in')
+                    messages.success(request,'Welcome')
                     return redirect('adminhome')
                 else:
                     auth.login(request,user)
-                    messages.success(request,'Success, you are logged in')  
+                    messages.success(request,'Welcome Back...')  
                     return redirect('userhome')  
 
 
@@ -99,10 +99,7 @@ def logout(request):
     return HttpResponseRedirect('/')
 
 
-@login_required(login_url='/login')
-@cache_control(no_cache=True,must_revalidate=True,no_store=True)
-def adminhome(request):
-    return render(request,'manager/adminhome.html')
+
 
 
 #User related functions
@@ -169,6 +166,8 @@ def editdetails(request,pk):
         
         return redirect('profile')
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def cart(request):
     user_id=request.user.id
     user1=CustomerModel.objects.get(customer=user_id)
@@ -176,7 +175,96 @@ def cart(request):
     context={'cartitems': cartitems}
     return render(request,'user/cart.html',context)
 
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def deleteitem(request,pk):
     cartitem=CartModel.objects.get(id=pk)
     cartitem.delete()
+    messages.warning(request,'----')
     return redirect('cart')
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def add_to_cart(request, pk):
+    user_id=request.user.id
+    user=CustomerModel.objects.get(customer=user_id)
+    product=ProductModel.objects.get(id=pk)
+    cart_item, created = CartModel.objects.get_or_create(user=user, product=product)
+    messages.success(request,'Item added')
+
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+        messages.success(request,'Item added')
+
+    return redirect('cart')
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def checkout(request):
+    user_id=request.user.id
+    user=CustomerModel.objects.get(customer=user_id)
+    cart_items = CartModel.objects.filter(user=user)
+
+    for item in cart_items:
+        product = item.product
+        product.pqty -= item.quantity
+        product.save()
+
+    cart_items.delete()
+    messages.success(request,'Order placed')
+
+    return redirect('userhome')
+
+
+
+
+# admin related 
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def adminhome(request):
+    return render(request,'manager/adminhome.html')
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def category(request):
+    return render(request,'manager/category.html')
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def addcategory(request):
+    if not request.user.is_staff:
+        return redirect('/login')
+    else:
+        if request.method=='POST':
+            categoryname=request.POST['catagoryname']
+            
+            category=CategoryModel(category_name=categoryname)
+            category.save()
+            return redirect('adminhome')
+        
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def product(request):
+    category=CategoryModel.objects.all()
+    return render(request,'manager/product.html',{'category': category})
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def addproduct(request):
+    if not request.user.is_staff:
+        return redirect('/login')
+    else:
+        if request.method=='POST':
+            pname=request.POST['pname']
+            pdes=request.POST['pdes']
+            pimage=request.FILES['pimg']
+            pprice=request.POST['pprice']
+            pqty=request.POST['pqty']
+            select=request.POST['select']
+            category=CategoryModel.objects.get(id=select)
+            product=ProductModel(pname=pname,pdes=pdes,pimg=pimage,pprice=pprice,pqty=pqty,pcat=category)
+            product.save()
+            return redirect('adminhome')        

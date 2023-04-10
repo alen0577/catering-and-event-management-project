@@ -9,25 +9,28 @@ Cart
 {% load static %}
 
 <div class="nav fixed-top" style="background-color: rgb(5, 12, 69);;">
-    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>      
+    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
+    <a href="{% url 'userhome' %}"><label type="submit"  class="label" style="background-color: rgb(5, 12, 69);color: white;margin-top: 35px; font-size:large;margin-left: 25px;">Back</label>
+    </a>      
 </div>
 
 
 
 
 <div class="container mt-5" >
-    <h3 class="alert  text-center mb-5" style="margin-top: 150px; background-color: rgb(5, 12, 69);color: white;">
+    <h3 class="alert  text-center mb-5" style="margin-top: 150px; background-color: rgb(255, 255, 255);color: rgb(5, 12, 69);">
         CART DETAILS
     </h3>
     <div class="row">
         <div class="col-sm-10">
-            <table class="table  table-hover text-center " style="background-color: rgb(171, 180, 180);color: rgb(5, 12, 69);">
+            <table class="table table-hover text-center " style="background-color: rgb(171, 180, 180);color: rgb(5, 12, 69);">
                 <thead>
                     <tr>
                         <th>NAME</th>
                         <th>PRICE</th>
                         <th>CATEGORY</th>
                         <th>IMAGE</th>
+                        <th>QTY</th>
                         <th>ACTION</th>
                         
                         
@@ -42,10 +45,13 @@ Cart
                         <td>{{ p.product.pcat.category_name}}</td>  
                         <td>
                             {% if p.product.pimg %}
-                            <img src="{{ p.product.pimg.url }}" alt="" style="width: 200px;"></td>
-                            {% endif %}   
+                            <img src="{{ p.product.pimg.url }}" alt="" style="width: 150px;height: 100px;">
+                            {% endif %}
+                        </td>
+                        <td>{{ p.quantity}}</td>
+                           
                         <td>
-                            <a href="#"><button>Buy Now</button></a>
+                            <!-- <a href="#"><button>Buy Now</button></a> -->
                             <a href="{% url 'deleteitem' p.id %}"><button>Delete</button></a>
                         </td>
                         
@@ -57,6 +63,21 @@ Cart
     </div>
     
 </div>
+{% if cartitems %}
+<div class="container">
+    <div class="row">
+        
+        <div class="col-12">
+            <a href="{% url 'checkout' %}"><button type="submit"  class="btn btn-lg" style="margin-bottom: 10px;background-color: rgb(5, 12, 69);color: white;">CheckOut</button>
+            </a>
+           
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+
 
 
 
@@ -65,6 +86,51 @@ Cart
     width: 120%;
 }
 </style>
+
+
+{% for message in messages %}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+  {% if message.tags == 'info' %}
+  <script>
+    var m="{{message}}";
+    swal("Success!",m, "info")
+  </script>
+
+  <!-- modal show -->
+  <!-- <script>
+      $(document).ready(function() {
+          $("#loginmodal").modal('show');
+      });
+  </script> -->
+  
+
+  {% elif message.tags == 'error' %}
+  <script>
+    var m="{{message}}";
+    swal("Success..!",m, "error")
+  </script>
+
+  {% elif message.tags == 'success' %}
+  
+  <script>
+    var m="{{message}}";
+    swal("Success..!",m, "success")
+  </script>
+
+  {% else %}
+  <script>
+    var m="{{message}}";
+    swal("Deleted...!",m, "warning")
+  </script>
+  
+
+  {% endif %}
+
+
+{% endfor %}
+
 
 
 {% endblock %}

@@ -43,10 +43,11 @@ Royal Events-User_Home
               <h5 class="card-title"><b>{{i.pname}}</b></h5>
               <p class="card-text">{{i.pdes|truncatewords:6}}</p>
               <p class="card-text">{{i.pprice}}/-</p>
+              <p class="card-text">QTY:{{i.pqty}}</p>
               {% if i.pqty  %}
-              <a href="#" class="btn btn-dark" style="background-color: rgb(5, 12, 69);color: white;">Add to Cart</a>
+              <a href="{% url 'add_to_cart' i.id %}" class="btn btn-dark" style="background-color: rgb(5, 12, 69);color: white;">Add to Cart</a>
               {% else %}
-              <a href="#" class="btn btn-dark" style="background-color: rgb(5, 12, 69);color: white;">Not Available</a>
+              <label  class="label btn-dark disabed" style="background-color: rgb(5, 12, 69);color: white; border-radius: 3px;padding: 5px;">Not Available</label>
               {% endif %}
 
             </div>
@@ -115,10 +116,10 @@ Royal Events-User_Home
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 
-  {% if message.tags == 'info' %}
+  {% if message.tags == 'success' %}
   <script>
     var m="{{message}}";
-    swal("Blocked..!",m, "info")
+    swal("Success!",m, "success")
   </script>
 
   <!-- modal show -->
@@ -139,7 +140,7 @@ Royal Events-User_Home
   
   <script>
     var m="{{message}}";
-    swal("Welcome..!",m, "success")
+    swal("Welcome..!",m, "info")
   </script>
   
 
