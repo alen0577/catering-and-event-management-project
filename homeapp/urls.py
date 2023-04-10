@@ -25,4 +25,10 @@ urlpatterns = [
     path('add_category/',views.addcategory,name='addcategory'),
     path('product_page/',views.product,name='product'),
     path('add_product/',views.addproduct,name='addproduct'),
+    path('show_products/',views.showprdt,name='showprdt'),
+    path('editproduct/<int:pk>',views.editproduct,name='editproduct'),
+    path('update/<int:pk>',views.update,name='update'),
+    path('delete_product/<int:pk>',views.deleteprdt,name='deleteprdt'),
+    path('show_users/',views.showusr,name='showusr'),
+    path('delete_user/<int:pk>',views.deleteusr,name='deleteusr'),
 ]

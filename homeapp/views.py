@@ -93,7 +93,9 @@ def loginuser(request):
             else:
                 messages.error(request,'Enter data correctly')
                 return HttpResponseRedirect('/')
-        
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)        
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
@@ -269,4 +271,66 @@ def addproduct(request):
             product=ProductModel(pname=pname,pdes=pdes,pimg=pimage,pprice=pprice,pqty=pqty,pcat=category)
             product.save()
             messages.success(request,'Added')
-            return redirect('adminhome')        
+            return redirect('showprdt')        
+
+def showprdt(request):
+    if not request.user.is_staff:
+        return redirect('/login')
+    products=ProductModel.objects.all()
+    context={'products':products}
+    return render(request,'manager/showproduct.html',context)   
+
+
+def editproduct(request,pk):
+    product=ProductModel.objects.get(id=pk)
+    category=CategoryModel.objects.all()
+    context={'product':product,'category':category}
+    return render(request,'manager/edit.html',context) 
+
+def update(request,pk):
+        if request.method=='POST':
+            product=ProductModel.objects.get(id=pk)
+            product.pname=request.POST['pname']
+            product.pdes=request.POST['pdes']
+            product.pprice=request.POST['pprice']
+            product.pqty=request.POST['pqty']
+            select=request.POST.get('select')
+            category=CategoryModel.objects.get(id=select)
+            product.pcat=category
+            old=product.pimg
+            new=request.FILES.get('pimg')
+            if old != None and new==None:
+                product.pimg=old
+            else:
+                product.pimg=new
+
+            product.save()
+            messages.success(request,'Updated')
+            return redirect('showprdt')  
+
+
+
+def deleteprdt(request,pk):
+    if not request.user.is_staff:
+        return redirect('/login')
+    product=ProductModel.objects.get(id=pk)
+    product.delete()
+    messages.info(request,'---')
+    return redirect('showprdt')  
+
+def showusr(request):
+    if not request.user.is_staff:
+        return redirect('index')
+    customers=CustomerModel.objects.all()
+    context={'customers':customers}
+    return render(request,'manager/showuser.html',context)
+
+def deleteusr(request,pk):
+    if not request.user.is_staff:
+        return redirect('index')
+    customers=CustomerModel.objects.get(id=pk)
+    user_id=customers.customer.id
+    user=User.objects.get(id=user_id)
+    customers.delete()
+    user.delete()
+    return redirect('showusr')

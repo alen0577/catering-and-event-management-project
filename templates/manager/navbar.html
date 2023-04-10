@@ -46,12 +46,11 @@ li a:hover:not(.active) {
     <li><a class="active" href="{% url 'adminhome' %}">Dashboard</a></li>
     <li><a data-bs-toggle="modal" data-bs-target="#categorymodal" href="#news">Add Category</a></li>
     <li><a href="{% url 'product' %}">Add Food Products</a></li>
-    <li><a href="#about">Update Food Items</a></li>
-    <li><a href="#about">Food Products</a></li>
+    <li><a href="{% url 'showprdt' %}">Food Products</a></li>
     <li><a href="#about">Add Event Packs</a></li>
     <li><a href="#about">Add Menu Packs</a></li>
     <li><a href="#about">Event Requests</a></li>
-    <li><a href="#about">Customers</a></li>
+    <li><a href="{% url 'showusr' %}">Customers</a></li>
     <li><a href="{% url 'logout' %}">Logout</a></li>
 </ul>
 
