@@ -115,9 +115,13 @@ def userhome(request):
         product = ProductModel.objects.filter(Q(pname__icontains=query) | Q(pdes__icontains=query))
     else:
         product=ProductModel.objects.all()
+        eventpack=Eventpack.objects.all()
+        menupack=Menupack.objects.all()
+        booking=Eventbooking.objects.all()
+    
         
     
-    context={'product':product}
+    context={'product':product,'event':eventpack, 'menu':menupack,'booking':booking}
     return render(request,'user/userhome.html',context)
 
 @login_required(login_url='/login')
@@ -222,6 +226,7 @@ def checkout(request):
 
 
 
+
 # admin related 
 
 @login_required(login_url='/login')
@@ -273,6 +278,9 @@ def addproduct(request):
             messages.success(request,'Added')
             return redirect('showprdt')        
 
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def showprdt(request):
     if not request.user.is_staff:
         return redirect('/login')
@@ -280,13 +288,17 @@ def showprdt(request):
     context={'products':products}
     return render(request,'manager/showproduct.html',context)   
 
-
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def editproduct(request,pk):
     product=ProductModel.objects.get(id=pk)
     category=CategoryModel.objects.all()
     context={'product':product,'category':category}
     return render(request,'manager/edit.html',context) 
 
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def update(request,pk):
         if request.method=='POST':
             product=ProductModel.objects.get(id=pk)
@@ -310,6 +322,8 @@ def update(request,pk):
 
 
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def deleteprdt(request,pk):
     if not request.user.is_staff:
         return redirect('/login')
@@ -318,6 +332,8 @@ def deleteprdt(request,pk):
     messages.info(request,'---')
     return redirect('showprdt')  
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def showusr(request):
     if not request.user.is_staff:
         return redirect('index')
@@ -325,6 +341,9 @@ def showusr(request):
     context={'customers':customers}
     return render(request,'manager/showuser.html',context)
 
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def deleteusr(request,pk):
     if not request.user.is_staff:
         return redirect('index')

@@ -18,7 +18,7 @@ urlpatterns = [
     path('delete_item/<int:pk>',views.deleteitem,name='deleteitem'),
     path('addcart/<int:pk>',views.add_to_cart,name='add_to_cart'),
     path('checkout/',views.checkout,name='checkout'),
-
+    
 
     path('admin-home_page/', views.adminhome,name='adminhome'),
     path('category_page/',views.category,name='category'),

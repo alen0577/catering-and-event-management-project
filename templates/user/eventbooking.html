@@ -1,0 +1,108 @@
+
+<!-- modal for Add category -->
+
+
+
+<div class="modal fade" id="eventmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: rgb(5, 12, 69);">
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+    
+    
+                <form method="post" action="{% url 'eventbooking'  %}" target="_self" class="needs-validation">
+                    {% csrf_token %}
+                    <div class="container">
+                        <h1 class="header" style="text-align: center;">BOOK EVENT</h1>
+    
+                        <div class="form-group">
+                            <label for="uname">Event Name:</label>
+                            <input type="text" name="eventname" class="form-control mt-3" placeholder="Enter Event Name" required> 
+                        </div>
+                        <div class="form-group">
+                            <label for="uname">Event Date:</label>
+                            <input type="date" name="date" class="form-control mt-3" placeholder="Enter Event Date" required> 
+                        </div>
+                        <div class="form-group">
+                            <label for="uname">Event Time:</label>
+                            <input type="time" name="time" class="form-control mt-3" placeholder="Enter Event time" required> 
+                        </div>
+                        <div class="form-group">
+                            <label for="uname">Event Venue:</label>
+                            <input type="text" name="venue" class="form-control mt-3" placeholder="Enter Event Venue" required> 
+                        </div>
+                        <div class="form-group">
+                            <label for="uname">Number of People:</label>
+                            <input type="number" name="number" class="form-control mt-3" placeholder="Enter Number of People" required> 
+                        </div>
+
+                        <div class="form-group">
+
+
+                            <label for="uname">Event Pack:</label>
+                            <select class="form-control" name="select1" id="qwerty">
+                                {% for i in event %}
+                
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                
+                                {% endfor %}
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+
+                            <label for="uname">Menu Pack:</label>
+                            <select class="form-control" name="select2" id="qwerty">
+                                {% for i in menu %}
+                
+                                <option value="{{ i.id }}">{{ i.name }}</option>
+                
+                                {% endfor %}
+                            </select>
+
+                        </div><br>
+
+                        
+                        
+                          
+                        <input type='submit' style="background-color: rgb(5, 12, 69);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='BOOK'>
+                        <br><br>
+                          
+                          
+              
+                      </div>
+                    </form>
+    
+            </div>
+            
+              <div class="modal-footer">
+                <button class="btn" data-bs-dismiss="modal" style=" color: white; background-color: rgb(5, 12, 69);" type="button"><a href="#" style="text-decoration: none;color: rgb(255, 255, 255);">Back</a> </button>
+    
+              </div>
+        </div>
+
+    
+    </div>
+</div>
+
+
+<style>
+
+div.modal{
+
+    font-family: Arial, Helvetica, sans-serif;
+    
+    
+}
+
+div.modal#signup div.modal-body{
+    padding: 10px;
+}
+
+    </style>
