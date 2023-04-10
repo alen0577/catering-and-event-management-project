@@ -243,6 +243,7 @@ def addcategory(request):
             
             category=CategoryModel(category_name=categoryname)
             category.save()
+            messages.success(request,'Added')
             return redirect('adminhome')
         
 @login_required(login_url='/login')
@@ -267,4 +268,5 @@ def addproduct(request):
             category=CategoryModel.objects.get(id=select)
             product=ProductModel(pname=pname,pdes=pdes,pimg=pimage,pprice=pprice,pqty=pqty,pcat=category)
             product.save()
+            messages.success(request,'Added')
             return redirect('adminhome')        
