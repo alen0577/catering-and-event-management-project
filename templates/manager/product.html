@@ -23,18 +23,18 @@ Add Product
         </h3>
             <form method="post" action="{% url 'addproduct' %}" enctype="multipart/form-data" >
                 {% csrf_token %}
-                <input type="text" name="pname" class="form-control mt-3" placeholder="Enter Product Name">
-                <input type="text" name="pdes" class="form-control mt-3" placeholder="Enter Product Description">
-                <input type="number" name="pprice" class="form-control mt-3 mb-3" placeholder="Enter Price">
-                <input type="number" name="pqty" class="form-control mt-3 mb-3" placeholder="Enter Quantity">
-                <input type="file" name="pimg" class="form-control mt-3 mb-3">
+                <input type="text" name="pname" class="form-control mt-3" placeholder="Enter Product Name" required>
+                <input type="text" name="pdes" class="form-control mt-3" placeholder="Enter Product Description" required>
+                <input type="number" name="pprice" class="form-control mt-3 mb-3" placeholder="Enter Price" required>
+                <input type="number" name="pqty" class="form-control mt-3 mb-3" placeholder="Enter Quantity" required>
+                <input type="file" name="pimg" class="form-control mt-3 mb-3" required>
                 
     
                 <!-- <input type="date" name="joindate" class="form-control mt-3 mb-3" placeholder="Enter Joining Date"> -->
     
-                <select class="form-control" name="select" id="qwerty">
+                <select class="form-control" name="select" id="qwerty" required>
                     {% for i in category %}
-    
+     
                     <option value="{{ i.id }}">{{ i.category_name }}</option>
     
                     {% endfor %}

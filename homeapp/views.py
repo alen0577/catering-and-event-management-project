@@ -113,15 +113,17 @@ def userhome(request):
 
     if query:
         product = ProductModel.objects.filter(Q(pname__icontains=query) | Q(pdes__icontains=query))
+        eventpack=Eventpack.objects.all()
+        menupack=Menupack.objects.all()
     else:
         product=ProductModel.objects.all()
         eventpack=Eventpack.objects.all()
         menupack=Menupack.objects.all()
-        booking=Eventbooking.objects.all()
+        
     
         
     
-    context={'product':product,'event':eventpack, 'menu':menupack,'booking':booking}
+    context={'product':product,'event':eventpack, 'menu':menupack}
     return render(request,'user/userhome.html',context)
 
 @login_required(login_url='/login')
@@ -227,6 +229,9 @@ def checkout(request):
 
 
 
+
+
+
 # admin related 
 
 @login_required(login_url='/login')
@@ -268,7 +273,7 @@ def addproduct(request):
         if request.method=='POST':
             pname=request.POST['pname']
             pdes=request.POST['pdes']
-            pimage=request.FILES['pimg']
+            pimage=request.FILES.get('pimg')
             pprice=request.POST['pprice']
             pqty=request.POST['pqty']
             select=request.POST['select']

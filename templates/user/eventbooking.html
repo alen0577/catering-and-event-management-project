@@ -14,36 +14,36 @@
             <div class="modal-body">
     
     
-                <form method="post" action="{% url 'eventbooking'  %}" target="_self" class="needs-validation">
+                <form method="post" action="" target="_self" class="needs-validation">
                     {% csrf_token %}
                     <div class="container">
-                        <h1 class="header" style="text-align: center;">BOOK EVENT</h1>
+                        <h1 class="header" style="text-align: center;">CUSTOMIZE EVENT</h1>
     
                         <div class="form-group">
-                            <label for="uname">Event Name:</label>
+                            <label for="eventname">Event Name:</label>
                             <input type="text" name="eventname" class="form-control mt-3" placeholder="Enter Event Name" required> 
                         </div>
                         <div class="form-group">
-                            <label for="uname">Event Date:</label>
+                            <label for="date">Event Date:</label>
                             <input type="date" name="date" class="form-control mt-3" placeholder="Enter Event Date" required> 
                         </div>
                         <div class="form-group">
-                            <label for="uname">Event Time:</label>
+                            <label for="time">Event Time:</label>
                             <input type="time" name="time" class="form-control mt-3" placeholder="Enter Event time" required> 
                         </div>
                         <div class="form-group">
-                            <label for="uname">Event Venue:</label>
+                            <label for="venue">Event Venue:</label>
                             <input type="text" name="venue" class="form-control mt-3" placeholder="Enter Event Venue" required> 
                         </div>
                         <div class="form-group">
-                            <label for="uname">Number of People:</label>
+                            <label for="number">Number of People:</label>
                             <input type="number" name="number" class="form-control mt-3" placeholder="Enter Number of People" required> 
                         </div>
 
                         <div class="form-group">
 
 
-                            <label for="uname">Event Pack:</label>
+                            <label for="select1">Event Pack:</label>
                             <select class="form-control" name="select1" id="qwerty">
                                 {% for i in event %}
                 
@@ -57,7 +57,7 @@
                         <div class="form-group">
 
 
-                            <label for="uname">Menu Pack:</label>
+                            <label for="select2">Menu Pack:</label>
                             <select class="form-control" name="select2" id="qwerty">
                                 {% for i in menu %}
                 
@@ -71,7 +71,7 @@
                         
                         
                           
-                        <input type='submit' style="background-color: rgb(5, 12, 69);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='BOOK'>
+                        <input type='submit' style="background-color: rgb(5, 12, 69);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='ADD'>
                         <br><br>
                           
                           
