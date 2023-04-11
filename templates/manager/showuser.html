@@ -96,6 +96,44 @@ h3{
 
 
 
+{% for message in messages %}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+  {% if message.tags == 'success' %}
+  <script>
+    var m="{{message}}";
+    swal("Success!",m, "success")
+  </script>
+
+  <!-- modal show -->
+  <!-- <script>
+      $(document).ready(function() {
+          $("#loginmodal").modal('show');
+      });
+  </script> -->
+  
+
+  {% elif message.tags == 'error' %}
+  <script>
+    var m="{{message}}";
+    swal("Denied..!",m, "error")
+  </script>
+
+  {% else %}
+  
+  <script>
+    var m="{{message}}";
+    swal("Deleted..!",m, "info")
+  </script>
+  
+
+  {% endif %}
+
+
+{% endfor %}
+
+
 
 
 {% endblock %}

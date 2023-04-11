@@ -2,6 +2,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+
+#basic url paths 
+#    
     path('',views.index,name='index'),
     path('usercreate/',views.usercreate,name='usercreate'),
     path('login/',views.login,name='login'),
@@ -9,6 +12,7 @@ urlpatterns = [
     path('logout/',views.logout,name='logout'),
 
     
+#user related url paths
 
     path('user-home_page/',views.userhome,name='userhome'),
     path('profile/',views.profile,name='profile'),
@@ -20,7 +24,11 @@ urlpatterns = [
     path('checkout/',views.checkout,name='checkout'),
     path('eventbooking/',views.eventbooking,name='eventbooking'),
     path('bookinglist/',views.bookinglist,name='bookinglist'),
+    path('deleteevent/<int:pk>',views.deleteevent,name='deleteevent'),
     
+
+
+#admin related url paths
 
     path('admin-home_page/', views.adminhome,name='adminhome'),
     path('category_page/',views.category,name='category'),
@@ -35,5 +43,10 @@ urlpatterns = [
     path('delete_user/<int:pk>',views.deleteusr,name='deleteusr'),
     path('addeventpacks/',views.addeventpacks,name='addeventpacks'),
     path('addmenupacks/',views.addmenupacks,name='addmenupacks'),
+    path('eventrequest/',views.eventrequest,name='eventrequest'),
+    path('approvedbookings/',views.approvedbookings,name='approvedbookings'),
+    path('approve/<int:pk>',views.approve,name='approve'),
+    path('reject/<int:pk>',views.reject,name='reject'),
+
 
 ]

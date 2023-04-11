@@ -136,6 +136,13 @@ Royal Events-User_Home
     swal("Denied..!",m, "error")
   </script>
 
+  {% elif message.tags == 'warning' %}
+  <script>
+    var m="{{message}}";
+    swal("Success...!",m, "warning")
+  </script>
+
+
   {% else %}
   
   <script>

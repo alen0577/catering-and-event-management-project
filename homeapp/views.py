@@ -98,6 +98,7 @@ def loginuser(request):
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)        
 def logout(request):
     auth.logout(request)
+    messages.success(request,'Logged Out')
     return HttpResponseRedirect('/')
 
 
@@ -241,7 +242,7 @@ def eventbooking(request):
 
         bookings=Eventbooking(eventname=eventname,date=date,time=time,venue=venue,people=people,eventpack=eventpack,menupack=menupack,user=user)
         bookings.save()
-        messages.info(request,'Your Booking request is received,please wait for confirmation')
+        messages.warning(request,'Your Booking request is received,please wait for confirmation')
         return redirect('userhome')
     return render(request,'user/userhome.html')
 
@@ -251,6 +252,12 @@ def bookinglist(request):
     bookinglist=Eventbooking.objects.filter(user=user1)
     context={'bookinglist':bookinglist}
     return render(request,'user/bookinglist.html',context)
+
+def deleteevent(request,pk):
+    eventitem=Eventbooking.objects.get(id=pk)
+    eventitem.delete()
+    messages.warning(request,'Deleted')
+    return redirect('userhome')
 
 
 
@@ -384,6 +391,7 @@ def deleteusr(request,pk):
     user=User.objects.get(id=user_id)
     customers.delete()
     user.delete()
+    messages.info(request,'---')
     return redirect('showusr')
 
 @login_required(login_url='/login')
@@ -420,4 +428,26 @@ def addmenupacks(request):
             menupacks.save()
             messages.success(request,'Added')
             return redirect('adminhome')
-        
+
+def eventrequest(request):
+    pendingbookings=Eventbooking.objects.filter(approved=False)
+    context={'pendingbookings':pendingbookings}
+    return render(request,'manager/request.html',context) 
+
+def approvedbookings(request):
+    approvedbookings=Eventbooking.objects.filter(approved=True)
+    context={'approvedbookings':approvedbookings}
+    return render(request,'manager/approve.html',context)
+
+def approve(request, pk):
+    booking = Eventbooking.objects.get(id=pk)
+    booking.approved = True
+    booking.save()
+    messages.success(request,'Event Booking Confirmed')
+    return redirect('approvedbookings')
+
+def reject(request, pk):
+    booking = Eventbooking.objects.get(id=pk)
+    booking.delete()
+    messages.success(request,'rejected')
+    return redirect('adminhome')       

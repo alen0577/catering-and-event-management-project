@@ -1,0 +1,121 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block title %}
+Approved Bookings
+{% endblock %}
+
+
+
+{% block body %}
+
+
+
+<div class="nav fixed-top " style="background-color: rgb(5, 12, 69);;">
+    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
+    <a href="{% url 'adminhome' %}"><label type="submit"  class="label" style="background-color: rgb(5, 12, 69);color: white;margin-top: 35px; font-size:large;margin-left: 25px;">Back</label>
+    </a>      
+</div>
+
+<div class="container mt-5">
+    <h3 class="alert text-center mb-5">
+        APPROVED BOOKINGS
+    </h3>
+    <div class="row">
+        <div class="col-sm-10">
+            <table class="table  text-center ">
+                <thead>
+                    <tr>
+                        <th>CUSTOMER USERNAME</th>
+                        <th>EVENT NAME</th>
+                        <th>DATE</th>
+                        <th>TIME</th>
+                        <th>COUNT</th>
+                        <th>ACTION</th>
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in approvedbookings %}
+                    <tr>
+                        <td>{{ p.user.customer.username}}</td>
+                        <td>{{ p.eventname}}</td>
+                        <td>{{ p.date}}</td>
+                        <td>{{ p.time}}</td>
+                        <td>{{ p.people}}</td>
+                        
+                        
+                           
+                        <td>
+                            
+                            <a href=""><button class="btn btn-success" >Approved</button></a>
+                            
+                            <!-- <a href=""><button class="btn btn-warning">Delete</button></a> -->
+                            
+                        </td>
+                       
+                        
+                    </tr>
+                
+                    {% endfor %}
+                </tbody> 
+        </div>
+    </div>
+</div>
+
+<style>
+.table{
+    width: 120%;
+    background-color: rgb(5, 12, 69);
+    color: white;
+    
+}
+h3{
+    color:rgb(5, 12, 69);
+    margin-top: 150px;
+}
+</style>
+
+
+
+{% for message in messages %}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+  {% if message.tags == 'success' %}
+  <script>
+    var m="{{message}}";
+    swal("Success!",m, "success")
+  </script>
+
+  <!-- modal show -->
+  <!-- <script>
+      $(document).ready(function() {
+          $("#loginmodal").modal('show');
+      });
+  </script> -->
+  
+
+  {% elif message.tags == 'error' %}
+  <script>
+    var m="{{message}}";
+    swal("Denied..!",m, "error")
+  </script>
+
+  {% else %}
+  
+  <script>
+    var m="{{message}}";
+    swal("Deleted..!",m, "info")
+  </script>
+  
+
+  {% endif %}
+
+
+{% endfor %}
+
+
+
+
+{% endblock %}
