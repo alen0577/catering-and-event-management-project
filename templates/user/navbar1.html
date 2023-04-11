@@ -97,3 +97,96 @@
 	</script>
 </body>
 </html>
+
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color:rgb(5, 12, 69);
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .main-content {
+    margin-left: 200px;
+    padding: 20px;
+  }
+
+  .menu-item {
+    list-style: none;
+    padding: 10px;
+    border-bottom: 1px solid #040404;
+  }
+
+  .menu-item a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .menu-item a:hover {
+    color: #000;
+  }
+
+  .toggle-btn {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+
+    .toggle-btn {
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .main-content {
+      margin-left: 0;
+    }
+  }
+</style>
+
+
+<div class="sidebar">
+  <button class="toggle-btn">☰</button>
+  <ul>
+    <li class="menu-item"><a href="{% url 'userhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
+    <li class="menu-item"><a href="{% url 'userhome' %}">Home</a></li>
+    <li class="menu-item"><a href="#section3">Food Items</a></li>
+    <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Book Events</a></li>
+    <li class="menu-item"><a href="{% url 'bookinglist' %}">Booking Status</a></li>
+    <li class="menu-item"><a href="{% url 'profile' %}">Profile</a></li>
+    <li class="menu-item"><a href="{% url 'cart' %}">Cart</a></li>
+    {% if user.is_authenticated %}
+    <li class="menu-item"><a href="{% url 'logout' %}">Logout</a></li>
+    {% else %}
+    <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#loginmodal" href="">Login</a></li>
+    <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="">Register</a></li>
+    {% endif %}
+  </ul>
+</div>
+
+
+
+<div class="main-content">
+
+
+  
+</div>

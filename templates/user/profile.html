@@ -6,18 +6,154 @@ Profile
 
 {% block body %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+<link rel="stylesheet" href="">
 
 
-<div class="nav fixed-top" style="background-color: rgb(5, 12, 69);;">
-  <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
-  <a href="{% url 'userhome' %}"><label type="submit"  class="label" style="background-color: rgb(5, 12, 69);color: white;margin-top: 35px; font-size:large;margin-left: 25px;font-family: Arial, Helvetica, sans-serif;">Back</label>
-  </a>      
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color:rgb(5, 12, 69);
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .main-content {
+    margin-left: 200px;
+    padding: 20px;
+  }
+
+  .menu-item {
+    list-style: none;
+    padding: 10px;
+    border-bottom: 1px solid #040404;
+  }
+
+  .menu-item a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .menu-item a:hover {
+    color: #000;
+  }
+
+  .toggle-btn {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+
+    .toggle-btn {
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .main-content {
+      margin-left: 0;
+    }
+  }
+  .card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    background-color: white;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    color: rgb(5, 12, 69);
+    border-radius: 10px;
+  }
+  .title {
+    color: rgb(20, 48, 51);
+    font-size: 18px;
+  }
+  button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color:rgb(5, 12, 69);
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+  }
+  button:hover, a:hover {
+    opacity: 0.7;
+  }
+input.btn{
+
+    background-color: rgb(255, 255, 255);
+    color: rgb(5, 12, 69);
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(15, 248, 224);
+    margin-bottom: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+input.btn:hover{
+    
+    background-color: rgb(5, 12, 69);
+    color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border-style: solid;
+    border-color: rgb(15, 248, 224);
+    
+}
+h1{
+    text-align: center;
+    background-color: rgb(5, 12, 69);
+    color: white;
+    
+    
+}
+  
+</style>
+
+
+<div class="sidebar">
+  <button class="toggle-btn"></button>
+  <ul>
+    <li class="menu-item"><a href="{% url 'userhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
+    <li class="menu-item"><a href="{% url 'userhome' %}">Home</a></li>
+    <!-- <li class="menu-item"><a href="#section3">Food Items</a></li> -->
+    <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Book Events</a></li>
+    <li class="menu-item"><a href="{% url 'bookinglist' %}">Booking Status</a></li>
+    <li class="menu-item"><a href="{% url 'profile' %}">Profile</a></li>
+    <li class="menu-item"><a href="{% url 'cart' %}">Cart</a></li>
+    {% if user.is_authenticated %}
+    <li class="menu-item"><a href="{% url 'logout' %}">Logout</a></li>
+    {% else %}
+    <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#loginmodal" href="">Login</a></li>
+    <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="">Register</a></li>
+    {% endif %}
+  </ul>
 </div>
 
 
 
-<div class="card">
+<div class="main-content">
+
+  <div class="card">
     {% if customer.photo %}
     <img src="{{customer.photo.url}}" alt="" style="width:100%">
     {% else %}
@@ -37,13 +173,27 @@ Profile
 
     
     <p><button>Contact: {{customer.mobile}}</button></p>
-    <a href="{% url 'editpage' %}" style="font-family: Arial, Helvetica, sans-serif;">Edit Profile</a>
+    <a href="{% url 'editpage' %}" style="font-family: Arial, Helvetica, sans-serif;text-decoration: none;color: rgb(5, 12, 69);">Edit Profile</a>
   </div>
 
-  <!-- <center><a href="{% url 'userhome' %}"><input class="btn"  type="submit" value="Back to Home"></a></center> -->
+
+
+  
+</div>
 
 
 
+
+
+
+
+
+
+
+
+
+
+{% include 'user/eventbooking.html' %}
 
 {% for message in messages %}
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
