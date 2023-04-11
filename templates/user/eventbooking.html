@@ -3,48 +3,49 @@
 
 
 
-<div class="modal fade" id="eventmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: rgb(5, 12, 69);">
+<div class="modal fade" id="eventmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: rgb(255, 255, 255);">
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content" style="background-color: rgb(5, 12, 69);border-radius: 15px;border-color: black;">
+            <!-- <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            </div> -->
             <div class="modal-body">
     
     
-                <form method="post" action="{% url 'eventbooking' %}" target="_self" class="needs-validation">
+                <form method="post" action="{% url 'eventbooking' %}" target="_self" class="needs-validation" novalidate>
                     {% csrf_token %}
                     <div class="container">
-                        <h1 class="header" style="text-align: center;">CUSTOMIZE EVENT</h1>
+                        <h2 class="header" style="text-align: center;">Customize Event</h2>
+                        <h5 class="header" style="text-align: center;">Make your <b>Moments</b> as your <b>Dreams</b></h5><br><br>
     
                         <div class="form-group">
                             <label for="eventname">Event Name:</label>
-                            <input type="text" name="eventname" class="form-control mt-3" placeholder="Event Name;  example like wedding,birthday,haldi..." required> 
-                        </div>
+                            <input type="text" style="background-color: rgb(71, 79, 141);" name="eventname" class="form-control mt-3" placeholder="Event Name;  example like wedding,birthday,haldi..." required> 
+                        </div><br>
                         <div class="form-group">
                             <label for="date">Event Date:</label>
-                            <input type="date" name="date" class="form-control mt-3" placeholder="Enter Event Date" required> 
-                        </div>
+                            <input type="date" style="background-color: rgb(71, 79, 141);" name="date" class="form-control mt-3" placeholder="Enter Event Date" required> 
+                        </div><br>
                         <div class="form-group">
                             <label for="time">Event Time:</label>
-                            <input type="time" name="time" class="form-control mt-3" placeholder="Enter Event time" required> 
-                        </div>
+                            <input style="background-color: rgb(71, 79, 141);" type="time" name="time" class="form-control mt-3" placeholder="Enter Event time" required> 
+                        </div><br>
                         <div class="form-group">
                             <label for="venue">Event Venue:</label>
-                            <input type="text" name="place" class="form-control mt-3" placeholder="Enter Event Venue" required> 
-                        </div>
+                            <input type="text" style="background-color: rgb(71, 79, 141);" name="place" class="form-control mt-3" placeholder="Enter Event Venue" required> 
+                        </div><br>
                         <div class="form-group">
                             <label for="people">Number of People:</label>
-                            <input type="number" name="people" class="form-control mt-3" placeholder="Enter Number of People" required> 
+                            <input type="number" style="background-color: rgb(71, 79, 141);" name="people" class="form-control mt-3" placeholder="Enter Number of People" required> 
                         </div><br>
 
                         <div class="form-group">
 
 
                             <label for="select1">Event Pack:</label>
-                            <select class="form-control" name="select1" id="qwerty">
+                            <select style="background-color: rgb(71, 79, 141);" class="form-control" name="select1" id="qwerty">
                                 {% for i in event %}
                 
                                 <option value="{{ i.id }}">{{ i.name }}</option>
@@ -58,7 +59,7 @@
 
 
                             <label for="select2">Menu Pack:</label>
-                            <select class="form-control" name="select2" id="qwerty">
+                            <select style="background-color: rgb(71, 79, 141);" class="form-control" name="select2" id="qwerty">
                                 {% for i in menu %}
                 
                                 <option value="{{ i.id }}">{{ i.name }}</option>
@@ -71,7 +72,7 @@
                         
                         
                           
-                        <input type='submit' style="background-color: rgb(5, 12, 69);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='BOOK NOW'>
+                        <input type='submit' style="background-color: rgb(22, 29, 83);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='BOOK NOW'>
                         <br><br>
                           
                           
@@ -81,10 +82,10 @@
     
             </div>
             
-              <div class="modal-footer">
+              <!-- <div class="modal-footer">
                 <button class="btn" data-bs-dismiss="modal" style=" color: white; background-color: rgb(5, 12, 69);" type="button"><a href="#" style="text-decoration: none;color: rgb(255, 255, 255);">Back</a> </button>
     
-              </div>
+              </div> -->
         </div>
 
     
@@ -106,3 +107,29 @@ div.modal#signup div.modal-body{
 }
 
     </style>
+
+<script>
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+
+
+</script>    

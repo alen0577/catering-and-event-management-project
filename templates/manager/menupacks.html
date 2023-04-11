@@ -3,40 +3,40 @@
 
 
 
-<div class="modal fade" id="menumodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: rgb(5, 12, 69);">
+<div class="modal fade" id="menumodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: rgb(255, 255, 255);">
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
-            <div class="modal-header">
+        <div class="modal-content" style="background-color: rgb(5, 12, 69);border-radius: 10px;border-color: black;">
+            <!-- <div class="modal-header">
               <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            </div> -->
             <div class="modal-body">
     
     
                 <form method="post" action="{% url 'addmenupacks' %}" target="_self" class="needs-validation">
                     {% csrf_token %}
-                    <div class="container">
-                        <h1 class="header" style="text-align: center;">MENU PACKAGES</h1>
+                    <div class="container" >
+                        <h1 class="header" style="text-align: center;">Menu Packages</h1><br><br>
     
                         <div class="form-group">
                             <label for="packagename">Package Name:</label>
-                            <input type="text" name="packagename" class="form-control mt-3" placeholder="Enter Package Name" required>   
+                            <input style="background-color: rgb(71, 79, 141);" type="text" name="packagename" class="form-control mt-3" placeholder="Enter Package Name" required>   
                         </div><br>
 
                         <div class="form-group">
                             <label for="packagedescription">Package Description:</label>
-                            <input type="text" name="packagedescription" class="form-control mt-3" placeholder="Enter Package Description" required>   
+                            <input style="background-color: rgb(71, 79, 141);" type="text" name="packagedescription" class="form-control mt-3" placeholder="Enter Package Description" required>   
                         </div><br>
 
                         <div class="form-group">
                             <label for="packageamount">Package Amount:</label>
-                            <input type="number" name="packageamount" class="form-control mt-3" placeholder="Enter Package Amount" required>   
-                        </div><br>
+                            <input style="background-color: rgb(71, 79, 141);" type="number" name="packageamount" class="form-control mt-3" placeholder="Enter Package Amount" required>   
+                        </div><br><br>
                         
                         
                           
-                        <input type='submit' style="background-color: rgb(5, 12, 69);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='ADD'>
+                        <input type='submit' style="background-color: rgb(22, 29, 78);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='ADD'>
                         <br><br>
                           
                           
@@ -46,10 +46,10 @@
     
             </div>
             
-              <div class="modal-footer">
+              <!-- <div class="modal-footer">
                 <button class="btn" data-bs-dismiss="modal" style=" color: white; background-color: rgb(5, 12, 69);" type="button"><a href="#" style="text-decoration: none;color: rgb(255, 255, 255);">Back</a> </button>
     
-              </div>
+              </div> -->
         </div>
 
     

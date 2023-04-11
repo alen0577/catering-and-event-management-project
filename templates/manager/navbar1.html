@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+<style>
+body {
+  
+    background-color: rgb(21, 34, 81);
+
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  background-color: rgb(5, 12, 69);
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+li a {
+  display: block;
+  color: #ffffff;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+li a.active {
+  background-color:rgb(32, 51, 122);
+  color: rgb(255, 255, 255);
+  
+}
+
+li a:hover:not(.active) {
+  background-color: rgb(32, 51, 122);
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<ul>
+     
+    <li><a class="navbar-brand"><img class='img-fluid' src="{% static 'images/logo.png' %}" style="height: 100%;width: 150px;"></a></li>
+    <li><a class="active" href="{% url 'adminhome' %}">Dashboard</a></li>
+    <!-- <li><a data-bs-toggle="modal" data-bs-target="#categorymodal" href="#">Add Category</a></li> -->
+    <li><a href="{% url 'product' %}">Add Food Products</a></li>
+    <li><a href="{% url 'showprdt' %}">Food Products</a></li>
+    <!-- <li><a data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Add Event Packs</a></li>
+    <li><a data-bs-toggle="modal" data-bs-target="#menumodal" href="#">Add Menu Packs</a></li> -->
+    <li><a href="{% url 'eventrequest' %}">Event Requests</a></li>
+    <li><a href="{% url 'approvedbookings' %}">Approved Requests</a></li>
+    <li><a href="{% url 'showusr' %}">Customers</a></li>
+    <li><a href="{% url 'logout' %}">Logout</a></li>
+</ul>
+
+
+</body>
+</html>
+
+

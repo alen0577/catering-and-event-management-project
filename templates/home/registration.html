@@ -2,86 +2,87 @@
 <!-- modal for registration -->
 
 
-<div class="modal fade" id="registrationmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: rgb(5, 12, 69);">
+<div class="modal fade" id="registrationmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="color: rgb(255, 255, 255);">
     <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
+      <div class="modal-content" style="background-color: rgb(5, 12, 69);border-radius: 15px;">
+        <!-- <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+        </div> -->
         <div class="modal-body">
 
           <div class="container">
-            <h1 class="header" style="text-align: center;">REGISTER</h1>
-            <fieldset>
-            <form id="registrationForm" method="post" action="{% url 'usercreate' %}" class="was-validated"  target="_self" enctype="multipart/form-data">
+            <h1 class="header" style="text-align: center;">Hi...!</h1>
+            <h5 class="header" style="text-align: center;">To get more discounts and features <br> <b>Become a Member.</b></h5><br><br>
+            
+            <form id="registrationForm" method="post" action="{% url 'usercreate' %}" class="needs-validation" novalidate  target="_self" enctype="multipart/form-data">
                 {% csrf_token %}
-                <fieldset>
+                
                     <div class="form-group">
                         <label for="firstname">First Name:</label>
-                        <input type="text" class="form-control" id="fname" placeholder="Enter first name" name="fname" required pattern="[A-Z][a-z]*">
+                        <input type="text" style="background-color: rgb(71, 79, 141);" class="form-control" id="fname" placeholder="Enter first name" name="fname" required pattern="[A-Z][a-z]*">
                         <!-- <div class="valid-feedback">Valid.</div> -->
                         <div class="invalid-feedback">First letter should be capital.</div>
-                      </div>
+                      </div><br>
                     
                       <div class="form-group">
                         <label for="lasttname">Last Name:</label>
-                        <input type="text" class="form-control" id="lname" placeholder="Enter last name" name="lname" required>
+                        <input type="text" style="background-color: rgb(71, 79, 141);" class="form-control" id="lname" placeholder="Enter last name" name="lname" required pattern="[A-Z][a-z]*">
                         <!-- <div class="valid-feedback">Valid.</div> -->
                         <div class="invalid-feedback">First letter should be capital.</div>
-                      </div>
+                      </div><br>
                       <div class="form-group">
                         <label for="lasttname">Username:</label>
-                        <input type="text" class="form-control" id="lname" placeholder="Enter username" name="uname" required>
+                        <input type="text" style="background-color: rgb(71, 79, 141);" class="form-control" id="lname" placeholder="Enter username" name="uname" required>
                         <!-- <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div> -->
-                      </div>
+                      </div><br>
                       <div class="form-group">
                         <label for="firstname">Address</label>
-                        <textarea rows="5" cols="10" class="form-control" id="address" placeholder="Enter address" name="address" required></textarea>
+                        <textarea rows="5" cols="10" style="background-color: rgb(71, 79, 141);" class="form-control" id="address" placeholder="Enter address" name="address" required></textarea>
                         <!-- <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div> -->
-                      </div>
+                      </div><br>
                       <div class="form-group">
                         <label>Email:</label>
-                        <input type="email" class="form-control" id="lname" placeholder="Enter email id" name="email" required>
+                        <input type="email" style="background-color: rgb(71, 79, 141);" class="form-control" id="lname" placeholder="Enter email id" name="email" required>
                         <!-- <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div> -->
-                      </div>
+                      </div><br>
                     
                       <div class="form-group">
                         <label>Mobile number:</label>
-                        <input type="tel" class="form-control"  placeholder="Enter mobile number" name="number"  required pattern="[0-9]{10}">
+                        <input type="tel" style="background-color: rgb(71, 79, 141);" class="form-control"  placeholder="Enter mobile number" name="number"  required pattern="[0-9]{10}">
                         <!-- <div class="valid-feedback">Valid.</div> -->
                         <div class="invalid-feedback">Please enter a valid 10-digit number</div>
-                      </div>
+                      </div><br>
                       <div class="form-group">
                         <label>Age:</label>
-                        <input type="number" class="form-control" placeholder="Enter age" name="age" required pattern="[0-9]">
+                        <input type="number" style="background-color: rgb(71, 79, 141);" class="form-control" placeholder="Enter age" name="age" required pattern="[0-9]">
                         <!-- <div class="valid-feedback">Valid.</div> -->
                         <!-- <div class="invalid-feedback">Please enter a valid age.</div> -->
-                      </div>
+                      </div><br>
                       <div class="form-group">
                         <label>State:</label>
-                        <input type="text" class="form-control"  placeholder="Enter  State" name="state" required>
+                        <input type="text" style="background-color: rgb(71, 79, 141);" class="form-control"  placeholder="Enter  State" name="state" required>
                         <!-- <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div> -->
-                      </div>
+                      </div><br>
                       <div class="form-group">
                         <label>Country:</label>
-                        <input type="text" class="form-control"  placeholder="Enter  Country" name="country" required>
+                        <input type="text" style="background-color: rgb(71, 79, 141);" class="form-control"  placeholder="Enter  Country" name="country" required>
                         <!-- <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div> -->
-                      </div>
+                      </div><br>
                       <div class="form-group">
                         <label>Pincode:</label>
-                        <input type="number" class="form-control"  placeholder="Enter  Pincode" name="pin" required pattern="[0-9]">
+                        <input type="number" style="background-color: rgb(71, 79, 141);" class="form-control"  placeholder="Enter  Pincode" name="pin" required pattern="[0-9]">
                         <!-- <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div> -->
-                      </div>
+                      </div><br>
                       <div class="form-group">
                         <label>Gender</label><br>
-                        <input type="text" class="form-control"  placeholder="Enter Gender" name="gender" required>
+                        <input type="text" style="background-color: rgb(71, 79, 141);" class="form-control"  placeholder="Enter Gender" name="gender" required>
                         <!-- <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div> -->
                         
@@ -89,47 +90,47 @@
                     
                     
                     
-                </fieldset><br>
+                <br>
         
                 <div class="form-group">
                     <label>Upload Photo: </label>
-                    <input type='file' name="photo"  accept="image/*">
+                    <input type='file' style="background-color: rgb(71, 79, 141);" name="photo"  accept="image/*">
                     
-                </div>
+                </div><br>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" aria-label="Password" aria-describedby="show-password" required>
-                    <button class="btn" style="color: rgb(5, 12, 69);margin-left: 400px;" type="button" id="show-password" onclick="togglePassword()">
+                    <input type="password" style="background-color: rgb(71, 79, 141);" class="form-control" id="password" placeholder="Enter password" name="password" aria-label="Password" aria-describedby="show-password" required>
+                    <button class="btn" style="color: rgb(255, 255, 255);margin-left: 400px;" type="button" id="show-password" onclick="togglePassword()">
                       <i class="bi bi-eye-slash-fill"></i>
                     </button>
                     <div class="input-group-append">
-                      <button class="btn " type="button" style="background-color: rgb(5, 12, 69);color: white;" id="generate-password">Generate password</button>
+                      <button class="btn " type="button" style="background-color: rgb(20, 30, 93);color: white;" id="generate-password">Generate password</button>
                     </div>
                     <!-- <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div> -->
-                </div>
+                </div><br>
                   <div class="form-group">
                     <label>Confirm Password:</label>
-                    <input type="password" class="form-control" id="cpassword" placeholder="Confirm password" name="cpassword" aria-label="Password" aria-describedby="show-password" required>
-                    <button class="btn" style="color: rgb(5, 12, 69);margin-left: 400px;" type="button" id="show-cpassword" onclick="togglecPassword()">
+                    <input type="password" style="background-color: rgb(71, 79, 141);" class="form-control" id="cpassword" placeholder="Confirm password" name="cpassword" aria-label="Password" aria-describedby="show-password" required>
+                    <button class="btn" style="color: rgb(255, 255, 255);margin-left: 400px;" type="button" id="show-cpassword" onclick="togglecPassword()">
                       <i class="bi bi-eye-slash-fill"></i>
                     </button>
                      <!-- <div class="valid-feedback">Valid.</div>
                     <div class="invalid-feedback">Please fill out this field.</div> -->
                    </div><br>
     
-                <input type='submit' class="btn" style="background-color: rgb(5, 12, 69); color: rgb(255, 255, 255);margin-bottom: 5px;" value='REGISTER'>
-                <input type='reset'class="btn" style="background-color: rgb(5, 12, 69); color: rgb(255, 255, 255);margin-bottom: 5px;" value='RESET'> <br>
-            </fieldset><br>
+                <input type='submit' class="btn" style="background-color: rgb(20, 30, 93); color: rgb(255, 255, 255);margin-bottom: 5px;" value='REGISTER'>
+                <!-- <input type='reset'class="btn" style="background-color: rgb(5, 12, 69); color: rgb(255, 255, 255);margin-bottom: 5px;" value='RESET'> <br> -->
+            <br>
             </form>
         
 
           
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           <button class="btn" data-bs-dismiss="modal" style="background-color: rgb(5, 12, 69);color: white;" type="button"><a href="#" style="text-decoration: none;color: rgb(255, 255, 255);">Back</a> </button>
 
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -182,6 +183,29 @@ function togglecPassword() {
 }
 
 
+
+
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+
+
 </script>
 
 
@@ -213,5 +237,8 @@ div.footer{
     height: 150px;
     background-color: rgb(251, 251, 251);
     color: rgb(246, 110, 19);
+}
+input{
+  background-color: rgb(5, 12, 69);
 }
 </style>

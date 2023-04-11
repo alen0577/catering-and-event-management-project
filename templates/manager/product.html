@@ -8,51 +8,84 @@ Add Food Items
 
 {% block body %}
 
-<div class="nav fixed-top" style="background-color: rgb(5, 12, 69);;">
+
+
+    <div class="row">
+
+        <div class="col-4">
+            {% include 'manager/navbar1.html' %}
+        </div>
+
+
+        
+
+        <div class="col-4">
+            <div class="container">
+
+                <div class="container">
+                    <h3 class="alert  text-center mb-5 w-50" style="color: rgb(255, 255, 255);background-color:rgb(21, 34, 81);">
+                      <center>  Add Product</center>
+                    </h3>
+                        <form method="post" action="{% url 'addproduct' %}" enctype="multipart/form-data" class="needs-validation" novalidate>
+                            {% csrf_token %}
+                            <input style="background-color: rgb(71, 79, 141);" type="text" name="pname" class="form-control mt-3" placeholder="Enter Product Name" required>
+                            <input style="background-color: rgb(71, 79, 141);" type="text" name="pdes" class="form-control mt-3" placeholder="Enter Product Description" required>
+                            <input style="background-color: rgb(71, 79, 141);" type="number" name="pprice" class="form-control mt-3 mb-3" placeholder="Enter Price" required>
+                            <input style="background-color: rgb(71, 79, 141);" type="number" name="pqty" class="form-control mt-3 mb-3" placeholder="Enter Quantity" required>
+                            <input style="background-color: rgb(71, 79, 141);" type="file" name="pimg" class="form-control mt-3 mb-3" required>
+                            
+                
+                            <!-- <input type="date" name="joindate" class="form-control mt-3 mb-3" placeholder="Enter Joining Date"> -->
+                
+                            <select style="background-color: rgb(71, 79, 141);" class="form-control" name="select" id="qwerty" required>
+                                {% for i in category %}
+                 
+                                <option value="{{ i.id }}">{{ i.category_name }}</option>
+                
+                                {% endfor %}
+                            </select>
+                
+                
+                            <button type="submit" class="btn btn-dark mt-3 " style="width: 650px;background-color: rgb(5, 12, 69); color: white;margin-bottom: 20px;">Submit</button>
+                        </form>
+                </div>
+            
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-4">
+            {% include 'manager/category.html' %}
+            {% include 'manager/eventpacks.html' %}
+            {% include 'manager/menupacks.html' %}
+    
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="nav fixed-top" style="background-color: rgb(5, 12, 69);;">
     <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
     <a href="{% url 'adminhome' %}"><label type="submit"  class="label" style="background-color: rgb(5, 12, 69);color: white;margin-top: 35px; font-size:large;margin-left: 25px;">Back</label>
     </a>      
-</div>
+</div> -->
 
 
-<center>
-
-    <div class="container">
-        <h3 class="alert  text-center mb-5 w-50" style="color: rgb(255, 255, 255);">
-          <center>  Add Product</center>
-        </h3>
-            <form method="post" action="{% url 'addproduct' %}" enctype="multipart/form-data" >
-                {% csrf_token %}
-                <input type="text" name="pname" class="form-control mt-3" placeholder="Enter Product Name" required>
-                <input type="text" name="pdes" class="form-control mt-3" placeholder="Enter Product Description" required>
-                <input type="number" name="pprice" class="form-control mt-3 mb-3" placeholder="Enter Price" required>
-                <input type="number" name="pqty" class="form-control mt-3 mb-3" placeholder="Enter Quantity" required>
-                <input type="file" name="pimg" class="form-control mt-3 mb-3" required>
-                
-    
-                <!-- <input type="date" name="joindate" class="form-control mt-3 mb-3" placeholder="Enter Joining Date"> -->
-    
-                <select class="form-control" name="select" id="qwerty" required>
-                    {% for i in category %}
-     
-                    <option value="{{ i.id }}">{{ i.category_name }}</option>
-    
-                    {% endfor %}
-                </select>
-    
-    
-                <button type="submit" class="btn btn-dark mt-3 " style="width: 650px;background-color: rgb(5, 12, 69); color: white;margin-bottom: 20px;">Submit</button>
-            </form>
-    </div>
-    
-
-
-
-
-
-
-
-</center>
 
 
 <style>
@@ -79,5 +112,28 @@ Add Food Items
 
 
 </style>
+
+<script>
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+(() => {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault()
+        event.stopPropagation()
+      }
+
+      form.classList.add('was-validated')
+    }, false)
+  })
+})()
+</script>
 
 {% endblock %}
