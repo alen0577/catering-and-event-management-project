@@ -65,10 +65,12 @@ def usercreate(request):
 
 def login(request):
     if request.user.is_authenticated:
-        return render(request,'user/userhome.html')
+        messages.info(request,'please login to Continue')
+        return redirect('/')
     else:
         messages.info(request,'Please login to access this page')
         return HttpResponseRedirect('/')
+
 
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)    
 def loginuser(request):
@@ -226,6 +228,9 @@ def checkout(request):
 
     return redirect('userhome')
 
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def eventbooking(request):
     if request.method=='POST':
         user_id=request.user.id
@@ -246,6 +251,8 @@ def eventbooking(request):
         return redirect('userhome')
     return render(request,'user/userhome.html')
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def bookinglist(request):
     user_id=request.user.id
     user1=CustomerModel.objects.get(customer=user_id)
@@ -253,6 +260,8 @@ def bookinglist(request):
     context={'bookinglist':bookinglist}
     return render(request,'user/bookinglist.html',context)
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def deleteevent(request,pk):
     eventitem=Eventbooking.objects.get(id=pk)
     eventitem.delete()
@@ -429,16 +438,22 @@ def addmenupacks(request):
             messages.success(request,'Added')
             return redirect('adminhome')
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def eventrequest(request):
     pendingbookings=Eventbooking.objects.filter(approved=False)
     context={'pendingbookings':pendingbookings}
     return render(request,'manager/request.html',context) 
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def approvedbookings(request):
     approvedbookings=Eventbooking.objects.filter(approved=True)
     context={'approvedbookings':approvedbookings}
     return render(request,'manager/approve.html',context)
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def approve(request, pk):
     booking = Eventbooking.objects.get(id=pk)
     booking.approved = True
@@ -446,6 +461,8 @@ def approve(request, pk):
     messages.success(request,'Event Booking Confirmed')
     return redirect('approvedbookings')
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def reject(request, pk):
     booking = Eventbooking.objects.get(id=pk)
     booking.delete()
