@@ -18,6 +18,8 @@ urlpatterns = [
     path('delete_item/<int:pk>',views.deleteitem,name='deleteitem'),
     path('addcart/<int:pk>',views.add_to_cart,name='add_to_cart'),
     path('checkout/',views.checkout,name='checkout'),
+    path('eventbooking/',views.eventbooking,name='eventbooking'),
+    path('bookinglist/',views.bookinglist,name='bookinglist'),
     
 
     path('admin-home_page/', views.adminhome,name='adminhome'),
@@ -31,4 +33,7 @@ urlpatterns = [
     path('delete_product/<int:pk>',views.deleteprdt,name='deleteprdt'),
     path('show_users/',views.showusr,name='showusr'),
     path('delete_user/<int:pk>',views.deleteusr,name='deleteusr'),
+    path('addeventpacks/',views.addeventpacks,name='addeventpacks'),
+    path('addmenupacks/',views.addmenupacks,name='addmenupacks'),
+
 ]

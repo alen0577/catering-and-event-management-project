@@ -1,7 +1,7 @@
-{% extends 'user/base.html' %}
+{% extends 'manager/base.html' %}
 {% load static %}
 {% block title %}
-Booking status
+Requests
 {% endblock %}
 
 
@@ -12,7 +12,7 @@ Booking status
 
 <div class="nav fixed-top " style="background-color: rgb(5, 12, 69);;">
     <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
-    <a href="{% url 'userhome' %}"><label type="submit"  class="label" style="background-color: rgb(5, 12, 69);color: white;margin-top: 35px; font-size:large;margin-left: 25px;">Back</label>
+    <a href="{% url 'adminhome' %}"><label type="submit"  class="label" style="background-color: rgb(5, 12, 69);color: white;margin-top: 35px; font-size:large;margin-left: 25px;">Back</label>
     </a>      
 </div>
 

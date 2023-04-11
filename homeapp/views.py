@@ -225,6 +225,33 @@ def checkout(request):
 
     return redirect('userhome')
 
+def eventbooking(request):
+    if request.method=='POST':
+        user_id=request.user.id
+        user=CustomerModel.objects.get(customer=user_id)
+        eventname=request.POST['eventname']
+        date=request.POST['date']
+        time=request.POST['time']
+        venue=request.POST['place']
+        people=request.POST['people']
+        select1=request.POST['select1']
+        eventpack=Eventpack.objects.get(id=select1)
+        select2=request.POST['select2']
+        menupack=Menupack.objects.get(id=select2)
+
+        bookings=Eventbooking(eventname=eventname,date=date,time=time,venue=venue,people=people,eventpack=eventpack,menupack=menupack,user=user)
+        bookings.save()
+        messages.info(request,'Your Booking request is received,please wait for confirmation')
+        return redirect('userhome')
+    return render(request,'user/userhome.html')
+
+def bookinglist(request):
+    user_id=request.user.id
+    user1=CustomerModel.objects.get(customer=user_id)
+    bookinglist=Eventbooking.objects.filter(user=user1)
+    context={'bookinglist':bookinglist}
+    return render(request,'user/bookinglist.html',context)
+
 
 
 
@@ -358,3 +385,39 @@ def deleteusr(request,pk):
     customers.delete()
     user.delete()
     return redirect('showusr')
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def addeventpacks(request):
+    if not request.user.is_staff:
+        return redirect('/login')
+    else:
+        if request.method=='POST':
+            name=request.POST['packagename']
+            des=request.POST['packagedescription']
+            price=request.POST['packageamount']
+            
+            
+            eventpacks=Eventpack(name=name,des=des,price=price)
+            eventpacks.save()
+            messages.success(request,'Added')
+            return redirect('adminhome')
+
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def addmenupacks(request):
+    if not request.user.is_staff:
+        return redirect('/login')
+    else:
+        if request.method=='POST':
+            name=request.POST['packagename']
+            des=request.POST['packagedescription']
+            price=request.POST['packageamount']
+            
+            
+            menupacks=Menupack(name=name,des=des,price=price)
+            menupacks.save()
+            messages.success(request,'Added')
+            return redirect('adminhome')
+        

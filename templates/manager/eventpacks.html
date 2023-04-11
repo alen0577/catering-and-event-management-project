@@ -14,7 +14,7 @@
             <div class="modal-body">
     
     
-                <form method="post" action="" target="_self" class="needs-validation">
+                <form method="post" action="{% url 'addeventpacks' %}" target="_self" class="needs-validation">
                     {% csrf_token %}
                     <div class="container">
                         <h1 class="header" style="text-align: center;">EVENT PACKAGES</h1>

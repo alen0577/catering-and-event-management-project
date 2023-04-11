@@ -9,6 +9,13 @@ Profile
 <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 
 
+<div class="nav fixed-top" style="background-color: rgb(5, 12, 69);;">
+  <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
+  <a href="{% url 'userhome' %}"><label type="submit"  class="label" style="background-color: rgb(5, 12, 69);color: white;margin-top: 35px; font-size:large;margin-left: 25px;font-family: Arial, Helvetica, sans-serif;">Back</label>
+  </a>      
+</div>
+
+
 
 <div class="card">
     {% if customer.photo %}
@@ -30,10 +37,10 @@ Profile
 
     
     <p><button>Contact: {{customer.mobile}}</button></p>
-    <a href="{% url 'editpage' %}">Edit Profile</a>
+    <a href="{% url 'editpage' %}" style="font-family: Arial, Helvetica, sans-serif;">Edit Profile</a>
   </div>
 
-  <center><a href="{% url 'userhome' %}"><input class="btn"  type="submit" value="Back to Home"></a></center>
+  <!-- <center><a href="{% url 'userhome' %}"><input class="btn"  type="submit" value="Back to Home"></a></center> -->
 
 
 

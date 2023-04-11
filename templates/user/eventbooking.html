@@ -14,14 +14,14 @@
             <div class="modal-body">
     
     
-                <form method="post" action="" target="_self" class="needs-validation">
+                <form method="post" action="{% url 'eventbooking' %}" target="_self" class="needs-validation">
                     {% csrf_token %}
                     <div class="container">
                         <h1 class="header" style="text-align: center;">CUSTOMIZE EVENT</h1>
     
                         <div class="form-group">
                             <label for="eventname">Event Name:</label>
-                            <input type="text" name="eventname" class="form-control mt-3" placeholder="Enter Event Name" required> 
+                            <input type="text" name="eventname" class="form-control mt-3" placeholder="Event Name;  example like wedding,birthday,haldi..." required> 
                         </div>
                         <div class="form-group">
                             <label for="date">Event Date:</label>
@@ -33,12 +33,12 @@
                         </div>
                         <div class="form-group">
                             <label for="venue">Event Venue:</label>
-                            <input type="text" name="venue" class="form-control mt-3" placeholder="Enter Event Venue" required> 
+                            <input type="text" name="place" class="form-control mt-3" placeholder="Enter Event Venue" required> 
                         </div>
                         <div class="form-group">
-                            <label for="number">Number of People:</label>
-                            <input type="number" name="number" class="form-control mt-3" placeholder="Enter Number of People" required> 
-                        </div>
+                            <label for="people">Number of People:</label>
+                            <input type="number" name="people" class="form-control mt-3" placeholder="Enter Number of People" required> 
+                        </div><br>
 
                         <div class="form-group">
 
@@ -52,7 +52,7 @@
                                 {% endfor %}
                             </select>
 
-                        </div>
+                        </div><br>
 
                         <div class="form-group">
 
@@ -71,7 +71,7 @@
                         
                         
                           
-                        <input type='submit' style="background-color: rgb(5, 12, 69);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='ADD'>
+                        <input type='submit' style="background-color: rgb(5, 12, 69);; color: rgb(255, 255, 255);margin-bottom: 5px;" value='BOOK NOW'>
                         <br><br>
                           
                           

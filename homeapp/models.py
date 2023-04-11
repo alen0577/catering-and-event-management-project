@@ -60,7 +60,19 @@ class Menupack(models.Model):
     def __str__(self):
         return self.name  
 
+class Eventbooking(models.Model):
+    eventname=models.CharField(max_length=255)
+    date=models.DateField()
+    time=models.TimeField()
+    venue=models.CharField(max_length=200)
+    people=models.IntegerField()
+    user=models.ForeignKey(CustomerModel,on_delete=models.CASCADE)
+    eventpack=models.ForeignKey(Eventpack,on_delete=models.CASCADE)
+    menupack=models.ForeignKey(Menupack,on_delete=models.CASCADE)
+    approved=models.BooleanField(default=False)
 
+    def __str__(self):
+        return self.eventname
 
 
 
