@@ -1,27 +1,99 @@
-<!-- <nav class="nav flex-column">
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
-    <a class="nav-link" href="#">Link</a>
-    <a class="nav-link" href="#">Link</a>
-    <a class="nav-link disabled">Disabled</a>
-</nav>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Dashboard</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+		}
 
+		.sidebar {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 200px;
+			height: 100%;
+			background-color: #0c1040;
+			overflow-x: hidden;
+			padding-top: 20px;
+		}
 
-<style>
-    nav.nav{
-        height: 100%;
-        width: 350px;
-        background-color: blue;
-    }
-</style> -->
+		.main-content {
+			margin-left: 200px;
+			padding: 20px;
+		}
 
-<div class="container">
-    <div class="row">
-      <div class="col-sm-6 bg-primary p-4 m-4">Section 1</div>
-      <div class="col-sm-6 bg-secondary p-4 m-4">
-        <div class="row">
-          <div class="col-sm-6 bg-success p-4 m-4">Subsection 1</div>
-          <div class="col-sm-6 bg-danger p-4 m-4">Subsection 2</div>
-        </div>
-      </div>
-    </div>
-  </div>
+		.menu-item {
+			list-style: none;
+			padding: 10px;
+			border-bottom: 1px solid #040404;
+		}
+
+		.menu-item a {
+			text-decoration: none;
+			color: #ffffff;
+		}
+
+		.menu-item a:hover {
+			color: #000;
+		}
+
+		.toggle-btn {
+			display: none;
+		}
+
+		@media screen and (max-width: 768px) {
+			.sidebar {
+				width: 100%;
+				height: auto;
+				position: relative;
+			}
+
+			.toggle-btn {
+				display: block;
+				position: absolute;
+				top: 10px;
+				right: 10px;
+			}
+
+			.main-content {
+				margin-left: 0;
+			}
+		}
+	</style>
+</head>
+<body>
+	<div class="sidebar">
+		<button class="toggle-btn">☰</button>
+		<ul>
+			<li class="menu-item"><a href="{% url 'userhome' %}">Dashboard</a></li>
+			<li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Book Events</a></li>
+			<li class="menu-item"><a href="{% url 'bookinglist' %}">Booking Status</a></li>
+      <li class="menu-item"><a href="{% url 'profile' %}">Profile</a></li>
+      <li class="menu-item"><a href="{% url 'cart' %}">Cart</a></li>
+      {% if user.is_authenticated %}
+			<li class="menu-item"><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#loginmodal" href="">Login</a></li>
+      <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="">Register</a></li>
+      {% endif %}
+		</ul>
+	</div>
+	<div class="main-content">
+		<h1>Welcome to your dashboard!</h1>
+		<p>This is where you can view and manage your account information.</p>
+	</div>
+	<script>
+		var toggleBtn = document.querySelector('.toggle-btn');
+		var sidebar = document.querySelector('.sidebar');
+
+		toggleBtn.addEventListener('click', function() {
+			sidebar.classList.toggle('active');
+		});
+	</script>
+</body>
+</html>
