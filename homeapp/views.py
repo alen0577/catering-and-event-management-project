@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from . models import *
+from django.http import HttpResponseForbidden
 from django.core.mail import send_mail
 from django.db.models import Q
 
@@ -112,6 +113,9 @@ def logout(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def userhome(request):
+    if request.user.is_staff:
+        return redirect('/login')
+    
     query = request.GET.get('q')
 
     if query:
@@ -122,9 +126,7 @@ def userhome(request):
         product=ProductModel.objects.all()
         eventpack=Eventpack.objects.all()
         menupack=Menupack.objects.all()
-        
-    
-        
+         
     
     context={'product':product,'event':eventpack, 'menu':menupack}
     return render(request,'user/userhome.html',context)
@@ -132,12 +134,16 @@ def userhome(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def profile(request):
+    if request.user.is_staff:
+        return redirect('/login')
     customer=CustomerModel.objects.get(customer=request.user)
     return render(request,'user/profile.html',{'customer':customer})
 
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def editpage(request):
+    if request.user.is_staff:
+        return redirect('/login')
     customer=CustomerModel.objects.get(customer=request.user)
     context={'edit': customer}
     return render(request,'user/editprofile.html',context)
@@ -145,6 +151,8 @@ def editpage(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def editdetails(request,pk):
+    if request.user.is_staff:
+        return redirect('/login')
     if request.method=='POST':
         
         customer=CustomerModel.objects.get(id=pk)
@@ -180,6 +188,8 @@ def editdetails(request,pk):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def cart(request):
+    if request.user.is_staff:
+        return redirect('/login')
     user_id=request.user.id
     user1=CustomerModel.objects.get(customer=user_id)
     cartitems=CartModel.objects.filter(user=user1)
@@ -190,6 +200,8 @@ def cart(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def deleteitem(request,pk):
+    if request.user.is_staff:
+        return redirect('/login')
     cartitem=CartModel.objects.get(id=pk)
     cartitem.delete()
     messages.warning(request,'----')
@@ -198,6 +210,8 @@ def deleteitem(request,pk):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def add_to_cart(request, pk):
+    if request.user.is_staff:
+        return redirect('/login')
     user_id=request.user.id
     user=CustomerModel.objects.get(customer=user_id)
     product=ProductModel.objects.get(id=pk)
@@ -214,6 +228,8 @@ def add_to_cart(request, pk):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def checkout(request):
+    if request.user.is_staff:
+        return redirect('/login')
     user_id=request.user.id
     user=CustomerModel.objects.get(customer=user_id)
     cart_items = CartModel.objects.filter(user=user)
@@ -232,6 +248,8 @@ def checkout(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def eventbooking(request):
+    if request.user.is_staff:
+        return redirect('/login')
     if request.method=='POST':
         user_id=request.user.id
         user=CustomerModel.objects.get(customer=user_id)
@@ -254,6 +272,8 @@ def eventbooking(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def bookinglist(request):
+    if request.user.is_staff:
+        return redirect('/login')
     user_id=request.user.id
     user1=CustomerModel.objects.get(customer=user_id)
     bookinglist=Eventbooking.objects.filter(user=user1)
@@ -263,6 +283,8 @@ def bookinglist(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def deleteevent(request,pk):
+    if request.user.is_staff:
+        return redirect('/login')
     eventitem=Eventbooking.objects.get(id=pk)
     eventitem.delete()
     messages.warning(request,'Deleted')
@@ -280,6 +302,8 @@ def deleteevent(request,pk):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def adminhome(request):
+    if not request.user.is_staff:
+        return redirect('/login')
     events=Eventpack.objects.all()
     menu=Menupack.objects.all()
     context={'events':events,'menu':menu}
@@ -288,6 +312,8 @@ def adminhome(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def category(request):
+    if not request.user.is_staff:
+        return redirect('/login')
     return render(request,'manager/category.html')
 
 @login_required(login_url='/login')
@@ -307,6 +333,8 @@ def addcategory(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def product(request):
+    if not request.user.is_staff:
+        return redirect('/login')
     category=CategoryModel.objects.all()
     return render(request,'manager/product.html',{'category': category})
 
@@ -342,6 +370,8 @@ def showprdt(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def editproduct(request,pk):
+    if not request.user.is_staff:
+        return redirect('/login')
     product=ProductModel.objects.get(id=pk)
     category=CategoryModel.objects.all()
     context={'product':product,'category':category}
@@ -351,6 +381,8 @@ def editproduct(request,pk):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def update(request,pk):
+        if not request.user.is_staff:
+            return redirect('/login')
         if request.method=='POST':
             product=ProductModel.objects.get(id=pk)
             product.pname=request.POST['pname']
@@ -444,6 +476,8 @@ def addmenupacks(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def eventrequest(request):
+    if not request.user.is_staff:
+        return redirect('/login')
     pendingbookings=Eventbooking.objects.filter(approved=False)
     context={'pendingbookings':pendingbookings}
     return render(request,'manager/request.html',context) 
@@ -451,6 +485,8 @@ def eventrequest(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def approvedbookings(request):
+    if not request.user.is_staff:
+        return redirect('/login')
     approvedbookings=Eventbooking.objects.filter(approved=True)
     context={'approvedbookings':approvedbookings}
     return render(request,'manager/approve.html',context)
@@ -458,6 +494,8 @@ def approvedbookings(request):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def approve(request, pk):
+    if not request.user.is_staff:
+        return redirect('/login')
     booking = Eventbooking.objects.get(id=pk)
     booking.approved = True
     booking.save()
@@ -467,6 +505,8 @@ def approve(request, pk):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def reject(request, pk):
+    if not request.user.is_staff:
+        return redirect('/login')
     booking = Eventbooking.objects.get(id=pk)
     booking.delete()
     messages.success(request,'rejected')
