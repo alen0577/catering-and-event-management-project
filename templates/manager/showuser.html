@@ -76,14 +76,14 @@ Customers
   
   
 <div class="sidebar">
-    <button class="toggle-btn"></button>
+    <!-- <button class="toggle-btn"></button> -->
     <ul>
   
       <li class="menu-item"><a href="{% url 'adminhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
       <li class="menu-item"><a href="{% url 'adminhome' %}">Dashboard</a></li>
       <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#categorymodal" href="#">Add Category</a></li>
-      <li class="menu-item"><a href="{% url 'product' %}">Add Food Items</a></li>
-      <li class="menu-item"><a href="{% url 'showprdt' %}">Food Items</a></li>
+      <li class="menu-item"><a href="{% url 'product' %}">Add Dishes</a></li>
+      <li class="menu-item"><a href="{% url 'showprdt' %}">Dishes</a></li>
       <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Add Event Packs</a></li>
       <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#menumodal" href="#">Add Menu Packs</a></li>
   
@@ -101,96 +101,97 @@ Customers
   
   
     </ul>
-  </div>
+</div>
   
   
   
-  <div class="main-content">
-  
-    <section>
+<div class="main-content">
+
+  <section id="section1">
+    <div class="container">
+      <div class="row"><br><br><br>
+        <h3 class="text-center">MEMBERS</h3><br><br>
+        <div class="col-12">
+          <div class="table-responsive">
+
+            <table class="table  align-middle" style="background-color: rgb(5, 12, 69);color: white;">
+              <thead>
+                  <tr>
+
+                      <th>FIRST NAME</th>
+                      <th>LAST NAME</th>
+                      <th>USERNAME</th>
+                      <th>EMAIL</th>
+                      <th>ADDRESS</th>
+                      <th>AGE</th>
+                      <th>GENDER</th>
+                      <th>STATE</th>
+                      <th>COUNTRY</th>
+                      <th>PIN CODE</th>
+                      <th>PHOTO</th>
+                      <th>MOBILE</th>
+                      <th>DATE JOINED</th>
+                      <th>ACTION</th>
+                      
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for p in customers %}
+                  <tr>
+                      <td>{{ p.customer.first_name}}</td>
+                      <td>{{ p.customer.last_name}}</td>
+                      <td>{{ p.customer.username}}</td>
+                      <td>{{ p.customer.email}}</td>
+                      <td>{{ p.address}}</td>
+                      <td>{{ p.age}}</td>
+                      <td>{{ p.gender}}</td>
+                      <td>{{ p.state}}</td>  
+                      <td>{{ p.country}}</td> 
+                      <td>{{ p.pincode}}</td> 
+                      <td>
+                          {% if p.photo %}
+                          <img src="{{p.photo.url}}" alt="" style="width: 200px;height: 150px;">
+                          {% else %}
+                          <img src="{% static 'images/default.png' %}" alt="" style="width: 200px;height: 200px;">
+                          {% endif %}
+                      </td> 
+                      <td>{{ p.mobile }}</td>
+                      <td>{{ p.customer.date_joined }}</td>
+                      
+
+                      <td>
+                      
+                          <a href="{% url 'deleteusr' p.id %}"><button class="btn btn-danger">Delete</button></a>
+                      </td>
+                     
+                      
+                  </tr>
+              
+                  {% endfor %}
+              </tbody>
+            </table>
 
 
-        <div class="container mt-5">
-            <h3 class="alert text-center mb-5">
-             USER DETAILS
-            </h3>
-            <div class="row">
-                <div class="col-sm-10">
-                    <table class="table  text-center ">
-                        <thead>
-                            <tr>
-                                <th>FIRST NAME</th>
-                                <th>LAST NAME</th>
-                                <th>USERNAME</th>
-                                <th>EMAIL</th>
-                                <th>ADDRESS</th>
-                                <th>AGE</th>
-                                <th>GENDER</th>
-                                <th>STATE</th>
-                                <th>COUNTRY</th>
-                                <th>PIN CODE</th>
-                                <th>PHOTO</th>
-                                <th>MOBILE</th>
-                                <th>DATE JOINED</th>
-                                <th>ACTION</th>
-                                
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for p in customers %}
-                            <tr>
-                                <td>{{ p.customer.first_name}}</td>
-                                <td>{{ p.customer.last_name}}</td>
-                                <td>{{ p.customer.username}}</td>
-                                <td>{{ p.customer.email}}</td>
-                                <td>{{ p.address}}</td>
-                                <td>{{ p.age}}</td>
-                                <td>{{ p.gender}}</td>
-                                <td>{{ p.state}}</td>  
-                                <td>{{ p.country}}</td> 
-                                <td>{{ p.pincode}}</td> 
-                                <td>
-                                    {% if p.photo %}
-                                    <img src="{{p.photo.url}}" alt="" style="width: 200px;">
-                                    {% else %}
-                                    <img src="{% static 'images/default.png' %}" alt="" style="width: 200px;height: 150px;">
-                                    {% endif %}
-                                </td> 
-                                <td>{{ p.mobile }}</td>
-                                <td>{{ p.customer.date_joined }}</td>
-                                
-        
-                                <td>
-                                
-                                    <a href="{% url 'deleteusr' p.id %}"><button style="color:rgb(5, 12, 69)">Delete</button></a>
-                                </td>
-                               
-                                
-                            </tr>
-                        
-                            {% endfor %}
-                        </tbody> 
-                </div>
-            </div>
-        </div>
-        
-  
-      <div class="row">
-        <div class="col-4">
-            {% include 'home/login.html' %}  
-            {% include 'manager/category.html' %}
-            {% include 'manager/eventpacks.html' %}
-            {% include 'manager/menupacks.html' %}
-      
+
+
+
+
+          </div>
+
+
         </div>
       </div>
-    </section>
+    </div>
+  </section>
   
-  
-  
-  
-    
+            
+        
+{% include 'home/login.html' %}  
+{% include 'manager/category.html' %}
+{% include 'manager/eventpacks.html' %}
+{% include 'manager/menupacks.html' %}
+   
 </div>
   
 
@@ -201,18 +202,6 @@ Customers
 
 
 
-<style>
-.table{
-    width: 100%;
-    background-color: rgb(5, 12, 69);
-    color: white;
-    
-}
-h3{
-    color:rgb(5, 12, 69);
-    margin-top: 20px;
-}
-</style>
 
 
 
@@ -253,14 +242,7 @@ h3{
 
 {% endfor %}
 
-<script>
-  var toggleBtn = document.querySelector('.toggle-btn');
-  var sidebar = document.querySelector('.sidebar');
 
-  toggleBtn.addEventListener('click', function() {
-    sidebar.classList.toggle('active');
-  });
-</script>
 
 
 
