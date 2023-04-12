@@ -209,7 +209,7 @@ def add_to_cart(request, pk):
         cart_item.save()
         messages.success(request,'Item added')
 
-    return redirect('cart')
+    return redirect('userhome')
 
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
