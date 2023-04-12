@@ -15,7 +15,7 @@ Food Items...
       font-family: Arial, sans-serif;
       font-size: 16px;
       line-height: 1.5;
-      background-color:  rgb(21, 34, 81);
+      background-color:  rgb(255, 255, 255);
 
     }
   
@@ -114,7 +114,7 @@ Food Items...
 
 
             <div class="container mt-5" style="margin-top: 20px;">
-                <h3 class="alert  text-center mb-5" style="color: rgb(255, 255, 255)">
+                <h3 class="alert  text-center mb-5" style="color: rgb(5, 12, 69)">
                  FOOD ITEMS
                 </h3>
                 <div class="row">
@@ -142,7 +142,7 @@ Food Items...
                                     <td>{{ p.pcat.category_name}}</td>  
                                     <td>
                                         {% if p.pimg %}
-                                        <img src="{{ p.pimg.url }}" alt="" style="width: 200px;">
+                                        <img src="{{ p.pimg.url }}" alt="" style="width: 100%;height: 150px;">
                                         {% endif %}
                                     </td>
                                     <td>{{ p.pqty}}</td>
@@ -207,7 +207,7 @@ Food Items...
 
 <style>
 .table{
-    width: 120%;
+    width: 110%;
     margin-bottom: 10px;
     background-color: rgb(5, 12, 69);
     color: white;
