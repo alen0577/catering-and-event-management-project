@@ -8,49 +8,174 @@ Edit Product
 
 {% block body %}
 
-<div class="nav fixed-top " style="background-color: rgb(5, 12, 69);;">
-    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
-    <a href="{% url 'adminhome' %}"><label type="submit"  class="label" style="background-color: rgb(5, 12, 69);color: white;margin-top: 35px; font-size:large;margin-left: 25px;">Back</label>
-    </a>      
-</div>
 
-<div class="container">
-    <h3 class="alert text-center mb-5 w-50" style="color: rgb(5, 12, 69);">
-        Edit Product
-    </h3>
-        <form method="post" action="{% url 'update' product.id %}" enctype="multipart/form-data" >
-            {% csrf_token %}
-            <input type="text" name="pname" class="form-control mt-3" value="{{product.pname}}" placeholder="Enter Product Name">
-            <input type="text" name="pdes" class="form-control mt-3" value="{{product.pdes}}" placeholder="Enter Product Description">
-            <input type="number" name="pprice" class="form-control mt-3 mb-3" value="{{product.pprice}}" placeholder="Enter Price">
-            <input type="number" name="pqty" class="form-control mt-3 mb-3" value="{{product.pqty}}" placeholder="Enter Quantity">
-           
-            {% if product.pimg %}
-            <img id="a1" src="{{product.pimg.url}}" style="width: 200px;margin-left:5px;height: 175px;" alt="">
-            <input type="file" name="pimg" accept="image/*"><br><br>
-            {% endif %}
-            
 
-            <!-- <input type="date" name="joindate" class="form-control mt-3 mb-3" placeholder="Enter Joining Date"> -->
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100%;
+      background-color:rgb(5, 12, 69);
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+  
+    .main-content {
+      margin-left: 200px;
+      padding: 20px;
+    }
+  
+    .menu-item {
+      list-style: none;
+      padding: 10px;
+      border-bottom: 1px solid #040404;
+    }
+  
+    .menu-item a {
+      text-decoration: none;
+      color: #ffffff;
+    }
+  
+    .menu-item a:hover {
+      color: #000;
+    }
+  
+    .toggle-btn {
+      display: none;
+    }
+  
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+  
+      .toggle-btn {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+  
+      .main-content {
+        margin-left: 0;
+      }
+    }
+  </style>
+  
+  
+  <div class="sidebar">
+    <button class="toggle-btn"></button>
+    <ul>
+  
+      <li class="menu-item"><a href="{% url 'adminhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
+      <li class="menu-item"><a href="{% url 'adminhome' %}">Dashboard</a></li>
+      <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#categorymodal" href="#">Add Category</a></li>
+      <li class="menu-item"><a href="{% url 'product' %}">Add Food Items</a></li>
+      <li class="menu-item"><a href="{% url 'showprdt' %}">Food Items</a></li>
+      <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Add Event Packs</a></li>
+      <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#menumodal" href="#">Add Menu Packs</a></li>
+  
+  
+      <li class="menu-item"><a href="{% url 'eventrequest' %}">Event Requests</a></li>
+      <li class="menu-item"><a href="{% url 'approvedbookings' %}">Approved Events</a></li>
+      <li class="menu-item"><a href="{% url 'showusr' %}">Customers</a></li>
+  
+      {% if user.is_authenticated %}
+      <li class="menu-item"><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#loginmodal" href="">Login</a></li>
+      <!-- <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="">Register</a></li> -->
+      {% endif %}
+  
+  
+    </ul>
+  </div>
+  
+  
+  
+  <div class="main-content">
+  
+    <section>
 
-            <select class="form-control" name="select" id="qwerty">
-        
 
-                <option value="{{product.pcat.id}}">{{ product.pcat.category_name }}</option>
+        <div class="container">
+            <h3 class="alert text-center mb-5 w-50" style="color: rgb(5, 12, 69);">
+                Edit Product
+            </h3>
+                <form method="post" action="{% url 'update' product.id %}" enctype="multipart/form-data" >
+                    {% csrf_token %}
+                    <input type="text" name="pname" class="form-control mt-3" value="{{product.pname}}" style="color: rgb(5, 12, 69);" placeholder="Enter Product Name">
+                    <input type="text" name="pdes" class="form-control mt-3" value="{{product.pdes}}" style="color: rgb(5, 12, 69);" placeholder="Enter Product Description">
+                    <input type="number" name="pprice" class="form-control mt-3 mb-3" value="{{product.pprice}}" style="color: rgb(5, 12, 69);" placeholder="Enter Price">
+                    <input type="number" name="pqty" class="form-control mt-3 mb-3" value="{{product.pqty}}" style="color: rgb(5, 12, 69);" placeholder="Enter Quantity">
+                   
+                    {% if product.pimg %}
+                    <img id="a1" src="{{product.pimg.url}}" style="width: 200px;margin-left:5px;height: 175px;" alt="">
+                    <input type="file" name="pimg" style="color: rgb(5, 12, 69);" accept="image/*"><br><br>
+                    {% endif %}
+                    
         
-                {% for i in category %}
+                    <!-- <input type="date" name="joindate" class="form-control mt-3 mb-3" placeholder="Enter Joining Date"> -->
         
-                <option value="{{i.id}}">{{ i.category_name }}</option>
-        
-                {% endfor %}
-        
+                    <select class="form-control" style="color: rgb(5, 12, 69);" name="select" id="qwerty">
                 
-            </select>
+        
+                        <option value="{{product.pcat.id}}">{{ product.pcat.category_name }}</option>
+                
+                        {% for i in category %}
+                
+                        <option value="{{i.id}}">{{ i.category_name }}</option>
+                
+                        {% endfor %}
+                
+                        
+                    </select>
+        
+        
+                    <button type="submit" class="btn btn-dark mt-3 " style="width: 650px;background-color: rgb(5, 12, 69);color: white;margin-bottom: 20px;">Submit</button>
+                </form>
+        </div>
+        
 
 
-            <button type="submit" class="btn btn-dark mt-3 " style="width: 650px;background-color: rgb(5, 12, 69);color: white;margin-bottom: 20px;">Submit</button>
-        </form>
-</div>
+
+
+
+
+  
+      <div class="row">
+        <div class="col-4">
+            {% include 'home/login.html' %}  
+            {% include 'manager/category.html' %}
+            {% include 'manager/eventpacks.html' %}
+            {% include 'manager/menupacks.html' %}
+      
+        </div>
+      </div>
+    </section>
+  
+  
+  
+  
+    
+  </div>
+  
+
+
+
+
 
 <style>
 .container{
