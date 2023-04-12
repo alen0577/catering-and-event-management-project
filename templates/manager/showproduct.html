@@ -81,11 +81,11 @@ Food Items...
   
       <li class="menu-item"><a href="{% url 'adminhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
       <li class="menu-item"><a href="{% url 'adminhome' %}">Dashboard</a></li>
-      <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#categorymodal" href="#">Add Category</a></li>
+      <!-- <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#categorymodal" href="#">Add Category</a></li> -->
       <li class="menu-item"><a href="{% url 'product' %}">Add Food Items</a></li>
       <li class="menu-item"><a href="{% url 'showprdt' %}">Food Items</a></li>
-      <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Add Event Packs</a></li>
-      <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#menumodal" href="#">Add Menu Packs</a></li>
+      <!-- <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Add Event Packs</a></li> -->
+      <!-- <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#menumodal" href="#">Add Menu Packs</a></li> -->
   
   
       <li class="menu-item"><a href="{% url 'eventrequest' %}">Event Requests</a></li>
@@ -142,7 +142,7 @@ Food Items...
                                     <td>{{ p.pcat.category_name}}</td>  
                                     <td>
                                         {% if p.pimg %}
-                                        <img src="{{ p.pimg.url }}" alt="" style="width: 100%;height: 150px;">
+                                        <img src="{{ p.pimg.url }}" alt="" style="width: 200px;height: 150px;">
                                         {% endif %}
                                     </td>
                                     <td>{{ p.pqty}}</td>
@@ -252,6 +252,16 @@ Food Items...
 
 
 {% endfor %}
+
+<script>
+  var toggleBtn = document.querySelector('.toggle-btn');
+  var sidebar = document.querySelector('.sidebar');
+
+  toggleBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+  });
+</script>
+
 
 
 

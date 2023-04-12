@@ -199,5 +199,14 @@ body{
     width: 600px;
 } */
 </style>
+<script>
+  var toggleBtn = document.querySelector('.toggle-btn');
+  var sidebar = document.querySelector('.sidebar');
+
+  toggleBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+  });
+</script>
+
 
 {% endblock %}

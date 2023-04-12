@@ -280,7 +280,10 @@ def deleteevent(request,pk):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def adminhome(request):
-    return render(request,'manager/adminhome.html')
+    events=Eventpack.objects.all()
+    menu=Menupack.objects.all()
+    context={'events':events,'menu':menu}
+    return render(request,'manager/adminhome.html',context)
 
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)

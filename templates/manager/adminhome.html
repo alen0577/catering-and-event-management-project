@@ -110,8 +110,10 @@ Royal Events-Admin_Home
 
 <div class="main-content">
 
+
   <section>
 
+   
     <div class="row">
       <div class="col-4">
           {% include 'home/login.html' %}  
@@ -128,18 +130,6 @@ Royal Events-Admin_Home
 
   
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -184,10 +174,19 @@ Royal Events-Admin_Home
 
 <style>
 body{
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(220, 216, 254);
 }
 
 </style>
+<script>
+  var toggleBtn = document.querySelector('.toggle-btn');
+  var sidebar = document.querySelector('.sidebar');
+
+  toggleBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+  });
+</script>
+
 
 
 {% endblock %}

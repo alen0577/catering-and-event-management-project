@@ -9,35 +9,125 @@ Add Food Items
 {% block body %}
 
 
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100%;
+      background-color:rgb(5, 12, 69);
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+  
+    .main-content {
+      margin-left: 200px;
+      padding: 20px;
+    }
+  
+    .menu-item {
+      list-style: none;
+      padding: 10px;
+      border-bottom: 1px solid #040404;
+    }
+  
+    .menu-item a {
+      text-decoration: none;
+      color: #ffffff;
+    }
+  
+    .menu-item a:hover {
+      color: #000;
+    }
+  
+    .toggle-btn {
+      display: none;
+    }
+  
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+  
+      .toggle-btn {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+  
+      .main-content {
+        margin-left: 0;
+      }
+    }
+  </style>
+  
+  
+  <div class="sidebar fixed-top">
+    <!-- <button class="toggle-btn"></button> -->
+    <ul>
+  
+      <li class="menu-item"><a href="{% url 'adminhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
+      <li class="menu-item"><a href="{% url 'adminhome' %}">Dashboard</a></li>
+      <!-- <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#categorymodal" href="#">Add Category</a></li> -->
+      <li class="menu-item"><a href="{% url 'product' %}">Add Food Items</a></li>
+      <li class="menu-item"><a href="{% url 'showprdt' %}">Food Items</a></li>
+      <!-- <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Add Event Packs</a></li> -->
+      <!-- <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#menumodal" href="#">Add Menu Packs</a></li> -->
+  
+  
+      <li class="menu-item"><a href="{% url 'eventrequest' %}">Event Requests</a></li>
+      <li class="menu-item"><a href="{% url 'approvedbookings' %}">Approved Events</a></li>
+      <li class="menu-item"><a href="{% url 'showusr' %}">Customers</a></li>
+  
+      {% if user.is_authenticated %}
+      <li class="menu-item"><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#loginmodal" href="">Login</a></li>
+      <!-- <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="">Register</a></li> -->
+      {% endif %}
+  
+  
+    </ul>
+  </div>
+  
+  
+  
+  <div class="main-content">
+  
+    <section>
 
-    <div class="row">
 
         <div class="col-4">
-            {% include 'manager/navbar1.html' %}
-        </div>
-
-
-        
-
-        <div class="col-4">
-            <div class="container">
+            <div class="container" style="margin-left: 200px;">
 
                 <div class="container">
-                    <h3 class="alert  text-center mb-5 w-50" style="color: rgb(255, 255, 255);background-color:rgb(21, 34, 81);">
-                      <center>  Add Product</center>
+                    <h3 class=" text-center mb-5 w-50" style="color: rgb(5, 12, 69);">
+                      Add Product
                     </h3>
                         <form method="post" action="{% url 'addproduct' %}" enctype="multipart/form-data" class="needs-validation" novalidate>
                             {% csrf_token %}
-                            <input style="background-color: rgb(71, 79, 141);" type="text" name="pname" class="form-control mt-3" placeholder="Enter Product Name" required>
-                            <input style="background-color: rgb(71, 79, 141);" type="text" name="pdes" class="form-control mt-3" placeholder="Enter Product Description" required>
-                            <input style="background-color: rgb(71, 79, 141);" type="number" name="pprice" class="form-control mt-3 mb-3" placeholder="Enter Price" required>
-                            <input style="background-color: rgb(71, 79, 141);" type="number" name="pqty" class="form-control mt-3 mb-3" placeholder="Enter Quantity" required>
-                            <input style="background-color: rgb(71, 79, 141);" type="file" name="pimg" class="form-control mt-3 mb-3" required>
+                            <input style="background-color: rgb(255, 255, 255);" type="text" name="pname" class="form-control mt-3" placeholder="Enter Product Name" required>
+                            <input style="background-color: rgb(255, 255, 255);" type="text" name="pdes" class="form-control mt-3" placeholder="Enter Product Description" required>
+                            <input style="background-color: rgb(255, 255, 255);" type="number" name="pprice" class="form-control mt-3 mb-3" placeholder="Enter Price" required>
+                            <input style="background-color: rgb(255, 255, 255);" type="number" name="pqty" class="form-control mt-3 mb-3" placeholder="Enter Quantity" required>
+                            <input style="background-color: rgb(255, 255, 255);" type="file" name="pimg" class="form-control mt-3 mb-3" required>
                             
                 
                             <!-- <input type="date" name="joindate" class="form-control mt-3 mb-3" placeholder="Enter Joining Date"> -->
                 
-                            <select style="background-color: rgb(71, 79, 141);" class="form-control" name="select" id="qwerty" required>
+                            <select style="background-color: rgb(255, 255, 255);" class="form-control" name="select" id="qwerty" required>
                                 {% for i in category %}
                  
                                 <option value="{{ i.id }}">{{ i.category_name }}</option>
@@ -46,7 +136,7 @@ Add Food Items
                             </select>
                 
                 
-                            <button type="submit" class="btn btn-dark mt-3 " style="width: 650px;background-color: rgb(5, 12, 69); color: white;margin-bottom: 20px;">Submit</button>
+                            <button type="submit" class="btn btn-dark mt-3 " style="width: 500px;background-color: rgb(5, 12, 69); color: white;margin-bottom: 20px;">Submit</button>
                         </form>
                 </div>
             
@@ -58,16 +148,25 @@ Add Food Items
 
 
 
-    </div>
 
-    <div class="row">
+  
+      <div class="row">
         <div class="col-4">
+            {% include 'home/login.html' %}  
             {% include 'manager/category.html' %}
             {% include 'manager/eventpacks.html' %}
             {% include 'manager/menupacks.html' %}
-    
+      
         </div>
-    </div>
+      </div>
+    </section>
+  
+  
+  
+  
+    
+  </div>
+  
 
 
 
@@ -76,14 +175,6 @@ Add Food Items
 
 
 
-
-
-
-<!-- <div class="nav fixed-top" style="background-color: rgb(5, 12, 69);;">
-    <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100%;"></a>
-    <a href="{% url 'adminhome' %}"><label type="submit"  class="label" style="background-color: rgb(5, 12, 69);color: white;margin-top: 35px; font-size:large;margin-left: 25px;">Back</label>
-    </a>      
-</div> -->
 
 
 
@@ -97,15 +188,16 @@ Add Food Items
 
     .container{
         position: absolute;
-        top: 27%;
+        margin-top: 5%;
+        
     
     }
     input[type=text],[type=number],[type=file]{
-        width: 650px;
+        width: 500px;
     }
     
     #qwerty{
-        width: 650px;
+        width: 500px;
     }
 /* .btn{
     width: 600px;
@@ -136,5 +228,15 @@ Add Food Items
   })
 })()
 </script>
+
+<script>
+  var toggleBtn = document.querySelector('.toggle-btn');
+  var sidebar = document.querySelector('.sidebar');
+
+  toggleBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+  });
+</script>
+
 
 {% endblock %}
