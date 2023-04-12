@@ -291,6 +291,18 @@ def deleteevent(request,pk):
     return redirect('userhome')
 
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def packages(request):
+    if request.user.is_staff:
+        return redirect('/login')
+    events=Eventpack.objects.all()
+    menus=Menupack.objects.all()
+    context={'events':events, 'menus':menus}
+    return render(request,'user/packages.html',context)
+
+
+
 
 
 

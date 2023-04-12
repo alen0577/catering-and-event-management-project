@@ -1,3 +1,22 @@
+{% extends 'user/base.html' %}
+{% load static %}
+
+
+{% block title %}
+Packages
+{% endblock %}
+
+
+
+
+
+
+{% block body %}
+
+
+
+
+
 <style>
     body {
       margin: 0;
@@ -5,6 +24,8 @@
       font-family: Arial, sans-serif;
       font-size: 16px;
       line-height: 1.5;
+      background-color: rgb(220, 216, 254);
+
     }
   
     .sidebar {
@@ -60,15 +81,19 @@
         margin-left: 0;
       }
     }
-  </style>
+
+</style>
+
+
   
   
-  <div class="sidebar">
-    <button class="toggle-btn">☰</button>
+<div class="sidebar">
+    <!-- <button class="toggle-btn">☰</button> -->
     <ul>
       <li class="menu-item"><a href="{% url 'userhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
       <li class="menu-item"><a href="{% url 'userhome' %}">Home</a></li>
-      <li class="menu-item"><a href="#section3">Food Items</a></li>
+      <li class="menu-item"><a href="{% url 'userhome' %}">Food Items</a></li>
+      <li class="menu-item"><a href="{% url 'packages' %}">Packages</a></li>
       <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Book Events</a></li>
       <li class="menu-item"><a href="{% url 'bookinglist' %}">Booking Status</a></li>
       <li class="menu-item"><a href="{% url 'profile' %}">Profile</a></li>
@@ -80,13 +105,104 @@
       <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="">Register</a></li>
       {% endif %}
     </ul>
-  </div>
+</div>
   
   
   
-  <div class="main-content">
-  
-  
+<div class="main-content">
+
+    <section id="section1">
+        <div class="container">
+
+            <div class="row"><br>
+                <h3 class="text-center" style="color: rgb(5, 12, 69);">Menu Packages</h3><br>
+            
+                <div class="col-12">
+
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                          <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+
+                              
+                            </tr>
+                          </thead>
+
+                          {% for i in menus %}
+                          <tbody>
+                            
+                            <tr>
+
+                                <td class="align-top">{{i.name}}</td>
+                                <td class="align-top">{{i.des}}</td>
+                                <td class="align-top">{{i.price}}</td>
+                              
+                            </tr>
+
+                          </tbody>
+                          {% endfor %}
+
+                        </table>
+                    </div>
+
     
-  </div>
+                </div>
+            
+            </div><br><br>
+
+
+            <div class="row">
+                <h3 class="text-center" style="color: rgb(5, 12, 69);">Event Packages</h3><br>
+                <div class="col-12">
+
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                          <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+
+                              
+                            </tr>
+                          </thead>
+
+                          {% for i in events %}
+                          <tbody>
+                            
+                            <tr>
+
+                                <td class="align-top">{{i.name}}</td>
+                                <td class="align-top">{{i.des}}</td>
+                                <td class="align-top">{{i.price}}</td>
+                              
+                            </tr>
+
+                          </tbody>
+                          {% endfor %}
+
+                        </table>
+                    </div>
+
+
+                </div>
+            </div><br>
+        </div>
+    </section>
+
+    
+
+
+  
+  
+{% include 'user/eventbooking.html' %}  
+</div>
+
+
+
+
+{% endblock %}
   
