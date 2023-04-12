@@ -1,0 +1,206 @@
+{% extends 'user/base.html' %}
+{% load static %}
+{% block title %}
+Booking status
+{% endblock %}
+
+
+
+{% block body %}
+
+
+
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100%;
+      background-color:rgb(5, 12, 69);
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+  
+    .main-content {
+      margin-left: 200px;
+      padding: 20px;
+    }
+  
+    .menu-item {
+      list-style: none;
+      padding: 10px;
+      border-bottom: 1px solid #040404;
+    }
+  
+    .menu-item a {
+      text-decoration: none;
+      color: #ffffff;
+    }
+  
+    .menu-item a:hover {
+      color: #000;
+    }
+  
+    .toggle-btn {
+      display: none;
+    }
+  
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+  
+      .toggle-btn {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+  
+      .main-content {
+        margin-left: 0;
+      }
+    }
+  </style>
+  
+  
+  <div class="sidebar">
+    <!-- <button class="toggle-btn"></button> -->
+    <ul>
+      <li class="menu-item"><a href="{% url 'userhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
+      <li class="menu-item"><a href="{% url 'userhome' %}">Home</a></li>
+      <!-- <li class="menu-item"><a href="#section3">Food Items</a></li> -->
+      <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Book Events</a></li>
+      <li class="menu-item"><a href="{% url 'bookinglist' %}">Booking Status</a></li>
+      <li class="menu-item"><a href="{% url 'profile' %}">Profile</a></li>
+      <li class="menu-item"><a href="{% url 'cart' %}">Cart</a></li>
+      {% if user.is_authenticated %}
+      <li class="menu-item"><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#loginmodal" href="">Login</a></li>
+      <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="">Register</a></li>
+      {% endif %}
+    </ul>
+  </div>
+  
+  
+  
+  <div class="main-content">
+
+    <section id="section1">
+
+
+        <div class="container mt-5">
+            <h3 class="alert text-center mb-5">
+                BOOKING STATUS
+            </h3>
+            <div class="row">
+                <div class="col-sm-10">
+                    <table class="table  text-center ">
+                        <thead>
+                            <tr>
+                                <th>EVENT NAME</th>
+                                <th>DATE</th>
+                                <th>TIME</th>
+                                <th>COUNT</th>
+                                <th>STATUS</th>
+                                <th>REMOVE</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in bookinglist %}
+                            <tr>
+                                <td>{{ p.eventname}}</td>
+                                <td>{{ p.date}}</td>
+                                <td>{{ p.time}}</td>
+                                <td>{{ p.people}}</td>
+                                
+                                
+                                   
+                                <td>
+                                    {% if p.approved %}
+                                    <a href=""><button class="btn btn-success">Approved</button></a>
+                                    {% else %}
+                                    <a href=""><button class="btn btn-warning">Pending</button></a>
+                                    {% endif %}
+                                    
+                                </td>
+
+                                <td>
+                                  <a href="{% url 'deleteevent' p.id %}"><button class="btn btn-warning">Delete</button></a>
+
+                                </td>
+                               
+                                
+                            </tr>
+                        
+                            {% endfor %}
+                        </tbody> 
+                </div>
+            </div>
+        </div>
+        
+
+
+
+
+    </section>
+    {% include 'user/eventbooking.html' %}
+
+
+
+  
+  
+    
+  </div>
+
+  <style>
+    .table{
+        width: 110%;
+        background-color: rgb(5, 12, 69);
+        color: white;
+        
+    }
+    h3{
+        color:rgb(5, 12, 69);
+        margin-top: 100px;
+    }
+    </style>
+    
+  
+
+    <!-- <script>
+      var toggleBtn = document.querySelector('.toggle-btn');
+      var sidebar = document.querySelector('.sidebar');
+  
+      toggleBtn.addEventListener('click', function() {
+        sidebar.classList.toggle('active');
+      });
+    </script> -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
