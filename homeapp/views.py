@@ -317,8 +317,8 @@ def adminhome(request):
     if not request.user.is_staff:
         return redirect('/login')
     events=Eventpack.objects.all()
-    menu=Menupack.objects.all()
-    context={'events':events,'menu':menu}
+    menus=Menupack.objects.all()
+    context={'events':events,'menus':menus}
     return render(request,'manager/adminhome.html',context)
 
 @login_required(login_url='/login')
@@ -522,4 +522,25 @@ def reject(request, pk):
     booking = Eventbooking.objects.get(id=pk)
     booking.delete()
     messages.success(request,'rejected')
-    return redirect('adminhome')       
+    return redirect('adminhome')
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def deleteevent(request,pk):
+    if not request.user.is_staff:
+        return redirect('/login')
+    events=Eventpack.objects.get(id=pk)
+    events.delete()
+    messages.success(request,'rejected')
+    return redirect('adminhome')
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def deletemenu(request,pk):
+    if not request.user.is_staff:
+        return redirect('/login')
+    menus=Menupack.objects.get(id=pk)
+    menus.delete()
+    messages.success(request,'rejected')
+    return redirect('adminhome')
+

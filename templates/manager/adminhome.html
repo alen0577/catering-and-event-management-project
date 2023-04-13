@@ -111,27 +111,113 @@ Royal Events-Admin_Home
 <div class="main-content">
 
   <section>
-    <h3 class="text-center" style="color: rgb(5, 12, 69);font-size: xx-large;">ADMIN DASHBOARD</h3>
-  </section>
+    <h1 class="text-center navbar-brand" style="background-color: rgb(5, 12, 69);color: white;height: 35px;margin: 10px;font-size: large;"><marquee style="margin-top: 6px;"><b>ADMIN-DASHBOARD</b></marquee></h1>
+  </section><br><br>
 
 
-  <section>
+  <section id="section1">
+    <div class="container">
+
+        <div class="row"><br>
+            <h3 class="text-center" style="color: rgb(5, 12, 69);">Menu Packages</h3><br><br>
+        
+            <div class="col-12">
+
+                <div class="table-responsive">
+                    <table class="table align-middle" style="background-color: rgb(5, 12, 69);color: white;">
+                      <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+
+                          
+                        </tr>
+                      </thead>
+
+                      {% for i in menus %}
+                      <tbody>
+                        
+                        <tr>
+
+                            <td class="align-top">{{i.name}}</td>
+                            <td class="align-top">{{i.des}}</td>
+                            <td class="align-top">{{i.price}}/-</td>
+                            <td>
+                              <a href="{% url 'deletemenu' i.id %}"><button class="btn btn-danger">Delete</button></a>
+                            </td>
+                          
+                        </tr>
+
+                      </tbody>
+                      {% endfor %}
+
+                    </table>
+                </div>
+
+
+            </div>
+        
+        </div><br><br>
+
+
+        <div class="row">
+            <h3 class="text-center" style="color: rgb(5, 12, 69);">Event Packages</h3><br><br>
+            <div class="col-12">
+
+                <div class="table-responsive">
+                    <table class="table align-middle" style="background-color: rgb(5, 12, 69);color: white;">
+                      <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                            
+
+                          
+                        </tr>
+                      </thead>
+
+                      {% for i in events %}
+                      <tbody>
+                        
+                        <tr>
+
+                            <td class="align-top">{{i.name}}</td>
+                            <td class="align-top">{{i.des}}</td>
+                            <td class="align-top">{{i.price}}/-</td>
+                            <td>
+                              <a href="{% url 'deleteevent' i.id %}"><button class="btn btn-danger">Delete</button></a>
+                            </td>
+                          
+                        </tr>
+
+                      </tbody>
+                      {% endfor %}
+
+                    </table>
+                </div>
+
+
+            </div>
+        </div><br>
+    </div>
+</section>
+
+
+
+  
 
    
-    <div class="row">
-      <div class="col-4">
-          {% include 'home/login.html' %}  
-          {% include 'manager/category.html' %}
-          {% include 'manager/eventpacks.html' %}
-          {% include 'manager/menupacks.html' %}
     
-      </div>
-    </div>
-  </section>
-
-
-
-
+{% include 'home/login.html' %}  
+{% include 'manager/category.html' %}
+{% include 'manager/eventpacks.html' %}
+{% include 'manager/menupacks.html' %}
+    
+      
   
 </div>
 

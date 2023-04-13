@@ -73,11 +73,11 @@ Edit Product
         margin-left: 0;
       }
     }
-  </style>
+</style>
   
   
-  <div class="sidebar">
-    <button class="toggle-btn"></button>
+<div class="sidebar">
+    <!-- <button class="toggle-btn"></button> -->
     <ul>
   
       <li class="menu-item"><a href="{% url 'adminhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
@@ -102,112 +102,87 @@ Edit Product
   
   
     </ul>
-  </div>
+</div>
   
   
   
-  <div class="main-content">
-  
-    <section>
+<div class="main-content">
 
-
-        <div class="container">
-            <h3 class="alert text-center mb-5 w-50" style="color: rgb(5, 12, 69);">
-                Edit Dishes
-            </h3>
-                <form method="post" action="{% url 'update' product.id %}" enctype="multipart/form-data" >
-                    {% csrf_token %}
-                    <input type="text" name="pname" class="form-control mt-3" value="{{product.pname}}" style="color: rgb(5, 12, 69);" placeholder="Enter Dish Name">
-                    <input type="text" name="pdes" class="form-control mt-3" value="{{product.pdes}}" style="color: rgb(5, 12, 69);" placeholder="Enter Description">
-                    <input type="number" name="pprice" class="form-control mt-3 mb-3" value="{{product.pprice}}" style="color: rgb(5, 12, 69);" placeholder="Enter Price">
-                    <input type="number" name="pqty" class="form-control mt-3 mb-3" value="{{product.pqty}}" style="color: rgb(5, 12, 69);" placeholder="Enter Quantity">
-                   
-                    {% if product.pimg %}
-                    <img id="a1" src="{{product.pimg.url}}" style="width: 200px;margin-left:5px;height: 175px;" alt="">
-                    <input type="file" name="pimg" style="color: rgb(5, 12, 69);" accept="image/*"><br><br>
-                    {% endif %}
-                    
-        
-                    <!-- <input type="date" name="joindate" class="form-control mt-3 mb-3" placeholder="Enter Joining Date"> -->
-        
-                    <select class="form-control" style="color: rgb(5, 12, 69);" name="select" id="qwerty">
-                
-        
-                        <option value="{{product.pcat.id}}">{{ product.pcat.category_name }}</option>
-                
-                        {% for i in category %}
-                
-                        <option value="{{i.id}}">{{ i.category_name }}</option>
-                
-                        {% endfor %}
-                
-                        
-                    </select>
-        
-        
-                    <button type="submit" class="btn btn-dark mt-3 " style="width: 650px;background-color: rgb(5, 12, 69);color: white;margin-bottom: 20px;">Submit</button>
-                </form>
-        </div>
-        
-
-
-
-
-
-
-  
+  <section id="section1">
+    <div class="container"><br><br>
       <div class="row">
-        <div class="col-4">
-            {% include 'home/login.html' %}  
-            {% include 'manager/category.html' %}
-            {% include 'manager/eventpacks.html' %}
-            {% include 'manager/menupacks.html' %}
-      
+        <h3 class="text-center">Edit Dishes</h3>
+        <div class="col-12">
+
+          <form method="post" action="{% url 'update' product.id %}" enctype="multipart/form-data" >
+            {% csrf_token %}
+            <input type="text" name="pname" class="form-control mb-3" value="{{product.pname}}" style="color: rgb(5, 12, 69);" placeholder="Enter Dish Name">
+            <input type="text" name="pdes" class="form-control mb-3" value="{{product.pdes}}" style="color: rgb(5, 12, 69);" placeholder="Enter Description">
+            <input type="number" name="pprice" class="form-control mb-3" value="{{product.pprice}}" style="color: rgb(5, 12, 69);" placeholder="Enter Price">
+            <input type="number" name="pqty" class="form-control mb-3" value="{{product.pqty}}" style="color: rgb(5, 12, 69);" placeholder="Enter Quantity">
+           
+            {% if product.pimg %}
+            <img id="a1" src="{{product.pimg.url}}" style="width: 200px;margin-left:5px;height: 175px;" alt="">
+            <input type="file" name="pimg" style="color: rgb(5, 12, 69);" accept="image/*"><br><br>
+            {% endif %}
+            
+
+            <!-- <input type="date" name="joindate" class="form-control mt-3 mb-3" placeholder="Enter Joining Date"> -->
+
+            <select class="form-control form-select" style="color: rgb(5, 12, 69);" name="select" id="qwerty">
+        
+
+                <option value="{{product.pcat.id}}">{{ product.pcat.category_name }}</option>
+        
+                {% for i in category %}
+        
+                <option value="{{i.id}}">{{ i.category_name }}</option>
+        
+                {% endfor %}
+        
+                
+            </select><br>
+
+
+            <button type="submit" class="btn mb-3" style="background-color: rgb(5, 12, 69);color: white;margin-bottom: 20px;">Submit</button>
+          </form>
+
+
+
+
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+
+
+
+
+
+
+
   
-  
-  
-  
-    
-  </div>
+  {% include 'home/login.html' %}  
+  {% include 'manager/category.html' %}
+  {% include 'manager/eventpacks.html' %}
+  {% include 'manager/menupacks.html' %}
+      
+       
+</div>
   
 
 
 
 
 
-<style>
-.container{
-    position: absolute;
-    left: 30%;
-    top: 27%;
-}
-input[type=text],[type=number],[type=file]{
-    width: 650px;
-}
-label{
-    width: 650px;
-}
-#qwerty{
-    width: 650px;
-}
-body{
-    margin-bottom: 20px;
-}
-/* .btn{
-    width: 600px;
-} */
-</style>
-<script>
+<!-- <script>
   var toggleBtn = document.querySelector('.toggle-btn');
   var sidebar = document.querySelector('.sidebar');
 
   toggleBtn.addEventListener('click', function() {
     sidebar.classList.toggle('active');
   });
-</script>
+</script> -->
 
 
 {% endblock %}

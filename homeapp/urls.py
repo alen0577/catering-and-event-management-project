@@ -48,6 +48,10 @@ urlpatterns = [
     path('approvedbookings/',views.approvedbookings,name='approvedbookings'),
     path('approve/<int:pk>',views.approve,name='approve'),
     path('reject/<int:pk>',views.reject,name='reject'),
+    path('delete_event/<int:pk>',views.deleteevent,name='deleteevent'),
+    path('delete_menu/<int:pk>',views.deletemenu,name='deletemenu'),
+
+
 
 
 ]
