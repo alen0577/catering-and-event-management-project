@@ -115,8 +115,9 @@ Booking status
                     <th>Date</th>
                     <th>Time</th>
                     <th>Count</th>
+                    <th>Amount</th>
                     <th>Status</th>
-                    <th></th>
+                    <th>Feedbacks/Reasons</th>
                     
                     
                 </tr>
@@ -128,6 +129,7 @@ Booking status
                     <td>{{ p.date}}</td>
                     <td>{{ p.time}}</td>
                     <td>{{ p.people}}</td>
+                    <td>{{ p.amount}}</td>
                     
                     
                        
@@ -152,14 +154,22 @@ Booking status
                         
                     </td>
                     <td>
+
                       {% if p.completed %}
-                      <a href=""><button class="btn btn-success">Feedback</button></a>
-                      {% else %}
-                        {% if p.reason %}
-                        <p>{{p.reason}}</p>
+                        {% if p.feedback %}
+                        <label style="color: green;">Feedback submitted</label>
+                        {% else %}
+                        <a href="{% url 'feedback' p.id %}"><button class="btn btn-success">Feedback</button></a>
                         {% endif %}
 
-                      {% endif %}
+                      {% else %}
+                          {% if p.reason %}
+                          <p style="color: red;">Reason : {{p.reason}}</p>
+                          {% endif %}  
+
+                      {% endif %}  
+
+                      
 
                     </td>
     

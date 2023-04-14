@@ -302,6 +302,19 @@ def packages(request):
     context={'events':events, 'menus':menus}
     return render(request,'user/packages.html',context)
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def feedback(request, pk):
+    if request.method=='POST':
+        feedback=request.POST.get('feedback')
+        events=Eventbooking.objects.get(id=pk)
+        events.completed=True
+        events.feedback=feedback
+        events.save()
+        return redirect('userhome')
+    return render(request,'user/feedback.html')
+
+
 
 
 
@@ -571,4 +584,12 @@ def complete(request, pk):
     messages.success(request,'This Event is completed')
     return redirect('approvedbookings')
 
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def rejectedbookings(request):
+    if not request.user.is_staff:
+        return redirect('/login')
+    rejectedbookings=Eventbooking.objects.filter(approved=False)
+    context={'rejectedbookings':rejectedbookings}
+    return render(request,'manager/rejectedbookings.html',context)
 

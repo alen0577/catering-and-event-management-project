@@ -26,6 +26,7 @@ urlpatterns = [
     path('bookinglist/',views.bookinglist,name='bookinglist'),
     path('deleteevent/<int:pk>',views.deleteevent,name='deleteevent'),
     path('packages/',views.packages,name='packages'),
+    path('feedback/<int:pk>',views.feedback,name='feedback'),
     
 
 
@@ -52,6 +53,7 @@ urlpatterns = [
     path('delete_menu/<int:pk>',views.deletemenu,name='deletemenu'),
     path('completedbookings/',views.completedbookings,name='completedbookings'),
     path('complete/<int:pk>',views.complete,name='complete'),
+    path('rejectedbookings/',views.rejectedbookings,name='rejectedbookings'),
 
 
 
