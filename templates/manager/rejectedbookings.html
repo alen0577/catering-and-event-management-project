@@ -1,0 +1,254 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block title %}
+Rejected Bookings
+{% endblock %}
+
+
+
+{% block body %}
+
+
+<style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      background-color: rgb(220, 216, 254)
+    }
+  
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100%;
+      background-color:rgb(5, 12, 69);
+      overflow-x: hidden;
+      padding-top: 20px;
+    }
+  
+    .main-content {
+      margin-left: 200px;
+      padding: 20px;
+    }
+  
+    .menu-item {
+      list-style: none;
+      padding: 10px;
+      border-bottom: 1px solid #040404;
+    }
+  
+    .menu-item a {
+      text-decoration: none;
+      color: #ffffff;
+    }
+  
+    .menu-item a:hover {
+      color: #000;
+    }
+  
+    .toggle-btn {
+      display: none;
+    }
+  
+    @media screen and (max-width: 768px) {
+      .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+      }
+  
+      .toggle-btn {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+  
+      .main-content {
+        margin-left: 0;
+      }
+    }
+</style>
+  
+  
+<div class="sidebar">
+    <!-- <button class="toggle-btn"></button> -->
+    <ul>
+  
+      <li class="menu-item"><a href="{% url 'adminhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
+      <li class="menu-item"><a href="{% url 'adminhome' %}">Dashboard</a></li>
+      <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#categorymodal" href="#">Add Category</a></li>
+      <li class="menu-item"><a href="{% url 'product' %}">Add Dishes</a></li>
+      <li class="menu-item"><a href="{% url 'showprdt' %}">Dishes</a></li>
+      <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Add Event Packs</a></li>
+      <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#menumodal" href="#">Add Menu Packs</a></li>
+  
+  
+      <li class="menu-item"><a href="{% url 'eventrequest' %}">Event Requests</a></li>
+      <li class="menu-item"><a href="{% url 'approvedbookings' %}">Approved Events</a></li>
+      <li class="menu-item"><a href="{% url 'completedbookings' %}">Completed Events</a></li>
+
+      <li class="menu-item"><a href="{% url 'showusr' %}">Customers</a></li>
+  
+      {% if user.is_authenticated %}
+      <li class="menu-item"><a href="{% url 'logout' %}">Logout</a></li>
+      {% else %}
+      <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#loginmodal" href="">Login</a></li>
+      <!-- <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="">Register</a></li> -->
+      {% endif %}
+  
+  
+    </ul>
+</div>
+  
+  
+  
+<div class="main-content">
+
+  <section id="section1">
+    <div class="container">
+      <div class="row"><br><br>
+        <h3 class="text-center">Events Rejected</h3><br><br><br>
+        <div class="col-12">
+
+          <div class="table-responsive">
+
+
+            <table class="table  align-middle" style="background-color: rgb(5, 12, 69);color: white;">
+              <thead>
+                  <tr>
+                      <th>USERNAME</th>
+                      <th>EVENT NAME</th>
+                      <th>DATE</th>
+                      <th>TIME</th>
+                      <th>COUNT</th>
+                      <th>AMOUNT</th>
+                      <th>STATUS</th>
+                    
+                      
+                      
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for p in rejectedbookings %}
+                  <tr>
+                      <td>{{ p.user.customer.username}}</td>
+                      <td>{{ p.eventname}}</td>
+                      <td>{{ p.date}}</td>
+                      <td>{{ p.time}}</td>
+                      <td>{{ p.people}}</td>
+                      <td>{{ p.amount}}/-</td>
+
+
+                      <!-- <td>
+                                    
+                        <label class="btn" style="color: green;" >Approved</label>
+                        
+                        <a href=""><button class="btn btn-warning">Delete</button></a>
+                        
+                      </td> -->
+
+                      <td>
+                        <label style="color: rgb(220, 1, 1);">Rejected</label>
+                      </td>
+                  </tr>
+              
+                  {% endfor %}
+              </tbody> 
+            </table>
+  
+  
+  
+  
+  
+          </div>
+  
+  
+        </div>
+      </div>
+    </div>
+  </section>
+      
+
+                      
+
+  
+        
+
+
+{% include 'home/login.html' %}  
+{% include 'manager/category.html' %}
+{% include 'manager/eventpacks.html' %}
+{% include 'manager/menupacks.html' %}
+
+</div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% for message in messages %}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+
+  {% if message.tags == 'success' %}
+  <script>
+    var m="{{message}}";
+    swal("Success!",m, "success")
+  </script>
+
+  <!-- modal show -->
+  <!-- <script>
+      $(document).ready(function() {
+          $("#loginmodal").modal('show');
+      });
+  </script> -->
+  
+
+  {% elif message.tags == 'error' %}
+  <script>
+    var m="{{message}}";
+    swal("Denied..!",m, "error")
+  </script>
+
+  {% else %}
+  
+  <script>
+    var m="{{message}}";
+    swal("Deleted..!",m, "info")
+  </script>
+  
+
+  {% endif %}
+
+
+{% endfor %}
+<!-- <script>
+  var toggleBtn = document.querySelector('.toggle-btn');
+  var sidebar = document.querySelector('.sidebar');
+
+  toggleBtn.addEventListener('click', function() {
+    sidebar.classList.toggle('active');
+  });
+</script> -->
+
+
+
+
+
+{% endblock %}

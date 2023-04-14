@@ -1,0 +1,144 @@
+{% extends 'manager/base.html' %}
+{% load static %}
+{% block title %}
+Booking Requests
+{% endblock %}
+
+
+
+{% block body %}
+
+
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 100%;
+    background-color:rgb(5, 12, 69);
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .main-content {
+    margin-left: 200px;
+    padding: 20px;
+  }
+
+  .menu-item {
+    list-style: none;
+    padding: 10px;
+    border-bottom: 1px solid #040404;
+  }
+
+  .menu-item a {
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  .menu-item a:hover {
+    color: #000;
+  }
+
+  .toggle-btn {
+    display: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+
+    .toggle-btn {
+      display: block;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .main-content {
+      margin-left: 0;
+    }
+  }
+</style>
+
+
+<div class="sidebar">
+  <button class="toggle-btn"></button>
+  <ul>
+
+    <li class="menu-item"><a href="{% url 'adminhome' %}"><img src="{% static 'images/logo.png' %}" style="height: 100px;width: 100px;"></a></li>
+    <li class="menu-item"><a href="{% url 'adminhome' %}">Dashboard</a></li>
+    <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#categorymodal" href="#">Add Category</a></li>
+    <li class="menu-item"><a href="{% url 'product' %}">Add Dishes</a></li>
+    <li class="menu-item"><a href="{% url 'showprdt' %}">Dishes</a></li>
+    <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#eventmodal" href="#">Add Event Packs</a></li>
+    <li class="menu-item"><a  data-bs-toggle="modal" data-bs-target="#menumodal" href="#">Add Menu Packs</a></li>
+
+
+    <li class="menu-item"><a href="{% url 'eventrequest' %}">Event Requests</a></li>
+    <li class="menu-item"><a href="{% url 'approvedbookings' %}">Approved Events</a></li>
+    <li class="menu-item"><a href="{% url 'completedbookings' %}">Completed Events</a></li>
+
+    <li class="menu-item"><a href="{% url 'showusr' %}">Customers</a></li>
+
+
+   
+    {% if user.is_authenticated %}
+    <li class="menu-item"><a href="{% url 'logout' %}">Logout</a></li>
+    {% else %}
+    <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#loginmodal" href="">Login</a></li>
+    <!-- <li class="menu-item"><a data-bs-toggle="modal" data-bs-target="#registrationmodal" href="">Register</a></li> -->
+    {% endif %}
+
+
+  </ul>
+</div>
+
+
+
+<div class="main-content">
+
+
+
+  <section id="section1">
+    <div class="row">
+      <div class="col-12">
+       <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="exampleFormControlTextarea1" class="form-label">Reason for rejection</label>
+          <textarea class="form-control" id="reason" name="reason" rows="3" required></textarea>
+        </div>
+          
+        <input type="submit" class="form-control"  value="submit">
+
+
+
+       </form>
+      </div>
+    </div>
+  </section>
+
+    
+  {% include 'home/login.html' %}  
+  {% include 'manager/category.html' %}
+  {% include 'manager/eventpacks.html' %}
+  {% include 'manager/menupacks.html' %}
+    
+</div>
+
+{% endblock %}

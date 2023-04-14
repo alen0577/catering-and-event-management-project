@@ -106,54 +106,78 @@ Booking status
       <h3 class="text-center" style="color: rgb(5, 12, 69);">Event Status</h3><br>
       <div class="row">
         <div class="col-12">
+          <div class="table-responsive">
+            <table class="table" style="background-color: rgb(5, 12, 69);color: white;">
 
-          <table class="table" style="background-color: rgb(5, 12, 69);color: white;">
-
-            <thead>
-              <tr>
-                  <th>Event name</th>
-                  <th>Date</th>
-                  <th>Time</th>
-                  <th>Count</th>
-                  <th>Status</th>
-                  <!-- <th>Remove</th> -->
-                  
-                  
-              </tr>
-            </thead>
-            <tbody>
-              {% for p in bookinglist %}
-              <tr>
-                  <td>{{ p.eventname}}</td>
-                  <td>{{ p.date}}</td>
-                  <td>{{ p.time}}</td>
-                  <td>{{ p.people}}</td>
-                  
-                  
-                     
-                  <td>
-                      {% if p.approved %}
-                      <a href=""><button class="btn btn-success">Approved</button></a>
-                      {% else %}
-                      <a href=""><button class="btn btn-warning">Pending</button></a>
-                      <a href="{% url 'deleteevent' p.id %}"><button class="btn" style="color: red;">Delete</button></a>           
-                      {% endif %}
-                      
-                  </td>
+              <thead>
+                <tr>
+                    <th>Event name</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Count</th>
+                    <th>Status</th>
+                    <th></th>
+                    
+                    
+                </tr>
+              </thead>
+              <tbody>
+                {% for p in bookinglist %}
+                <tr>
+                    <td>{{ p.eventname}}</td>
+                    <td>{{ p.date}}</td>
+                    <td>{{ p.time}}</td>
+                    <td>{{ p.people}}</td>
+                    
+                    
+                       
+                    <td>
   
-                 
-                 
-                  
-              </tr>
+  
+                        {% if p.completed %}
+                        <a href=""><label style="color: green;">Completed</label></a>
+                        {% else %}
+                          {% if p.approved %}
+                          <a href=""><label style="color: green;">Approved</label></a>
+                          {% else %}
+                            {% if p.reason %}
+                            <a href=""><label style="color: rgb(255, 0, 0);">Rejected</label></a>
+                            {% else %}
+                            <a href=""><label style="color: orange;">Pending</label></a>
+                            <a href="{% url 'deleteevent' p.id %}"><button class="btn" style="color: red;">Delete</button></a>
+                            {% endif %}           
+                          {% endif %} 
+                        {% endif %}    
           
-              {% endfor %}
-            </tbody> 
+                        
+                    </td>
+                    <td>
+                      {% if p.completed %}
+                      <a href=""><button class="btn btn-success">Feedback</button></a>
+                      {% else %}
+                        {% if p.reason %}
+                        <p>{{p.reason}}</p>
+                        {% endif %}
 
+                      {% endif %}
 
-          
-
+                    </td>
+    
+                   
+                    
+                </tr>
             
-          </table>
+                {% endfor %}
+              </tbody> 
+  
+  
+            
+  
+              
+            </table>
+  
+          </div>
+
 
         </div>
       </div>

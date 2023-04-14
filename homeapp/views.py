@@ -491,7 +491,7 @@ def addmenupacks(request):
 def eventrequest(request):
     if not request.user.is_staff:
         return redirect('/login')
-    pendingbookings=Eventbooking.objects.filter(approved=False, completed=False)
+    pendingbookings=Eventbooking.objects.filter(approved=False,reason=None)
     context={'pendingbookings':pendingbookings}
     return render(request,'manager/request.html',context) 
 
@@ -518,12 +518,18 @@ def approve(request, pk):
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def reject(request, pk):
-    if not request.user.is_staff:
-        return redirect('/login')
-    booking = Eventbooking.objects.get(id=pk)
-    booking.delete()
-    messages.success(request,'rejected')
-    return redirect('adminhome')
+    if request.method=='POST':
+        reason=request.POST.get('reason')
+        events=Eventbooking.objects.get(id=pk)
+        events.approved=False
+        events.reason=reason
+        events.save()
+        return redirect('adminhome')
+    return render(request,'manager/rejectreason.html')
+    
+
+
+
 
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
