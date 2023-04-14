@@ -38,17 +38,17 @@
                         </div><br>
                         <div class="form-group">
                             <label for="people">Number of People:</label>
-                            <input type="number" style="background-color: rgb(71, 79, 141);" name="people" class="form-control mt-3" placeholder="Enter Number of People" required> 
+                            <input type="number" id="people" style="background-color: rgb(71, 79, 141);" name="people" class="form-control mt-3" placeholder="Enter Number of People" required> 
                         </div><br>
 
                         <div class="form-group">
 
 
                             <label for="select1">Event Pack:</label>
-                            <select style="background-color: rgb(71, 79, 141);" class="form-control" name="select1" id="qwerty">
+                            <select style="background-color: rgb(71, 79, 141);" class="form-control form-select" id="package" name="select1" id="qwerty">
                                 {% for i in event %}
                 
-                                <option value="{{ i.id }}">{{ i.name }}</option>
+                                <option value="{{ i.price }}">{{ i.name }}</option>
                 
                                 {% endfor %}
                             </select>
@@ -59,15 +59,22 @@
 
 
                             <label for="select2">Menu Pack:</label>
-                            <select style="background-color: rgb(71, 79, 141);" class="form-control" name="select2" id="qwerty">
+                            <select style="background-color: rgb(71, 79, 141);" class="form-control form-select" id="menu" name="select2" id="qwerty">
                                 {% for i in menu %}
                 
-                                <option value="{{ i.id }}">{{ i.name }}</option>
+                                <option value="{{ i.price }}">{{ i.name }}</option>
                 
                                 {% endfor %}
                             </select>
 
                         </div><br>
+                        <div class="form-group">
+                            <label for="people">Total amount:</label>
+                            <input type="number" id="total" style="background-color: rgb(71, 79, 141);" name="amount" class="form-control mt-3" readonly> 
+
+                            <!-- <span id="total">0/-</span> -->
+                        </div><br>
+
 
                         
                         
@@ -132,4 +139,41 @@ div.modal#signup div.modal-body{
 
 
 
-</script>    
+</script>  
+
+<!--<script>
+    // Get form elements
+    const menu = document.getElementById('menu');
+    const people = document.getElementById('people');
+    const package = document.getElementById('package');
+    const total = document.getElementById('total');
+  
+    // Calculate total cost on change
+    [menu, people, package].forEach(el => el.addEventListener('change', () => {
+      const menuCost = menu.value * people.value;
+      const packageCost = package.value;
+      const totalPrice = menuCost + parseInt(packageCost);
+      total.textContent = `${totalPrice}/-`;
+    }));
+</script> -->
+
+<script>
+
+    function calculateTotal() {
+
+        var package = parseInt(document.getElementById("package").value);
+        var menu =parseInt(document.getElementById("menu").value);
+        var people = parseInt(document.getElementById("people").value);
+  
+       
+        var total = (package + (menu * people));
+        document.getElementById("total").value = total;
+
+    }
+
+    document.getElementById("package").addEventListener("change", calculateTotal);
+    document.getElementById("menu").addEventListener("change", calculateTotal);
+    document.getElementById("people").addEventListener("change", calculateTotal);
+
+
+</script>

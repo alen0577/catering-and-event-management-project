@@ -156,10 +156,14 @@ Cart
 
                
             </table>
+          
+            {% if cartitems %}
+            <a href="{% url 'checkout' %}"><button class="btn btn-success">Confirm Order</button></a>
+            {% endif %}
 
           </div>
         </div>
-        <div class="col-3"></div>
+        
       </div>
     </section>
 

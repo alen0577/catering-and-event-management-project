@@ -155,6 +155,7 @@ function generatePassword() {
 $('#generate-password').click(function() {
   var password = generatePassword();
   $('#password').val(password);
+  $('#cpassword').val(password);
 });
 
 function togglePassword() {

@@ -259,11 +259,12 @@ def eventbooking(request):
         venue=request.POST['place']
         people=request.POST['people']
         select1=request.POST['select1']
-        eventpack=Eventpack.objects.get(id=select1)
+        eventpack=Eventpack.objects.get(price=select1)
         select2=request.POST['select2']
-        menupack=Menupack.objects.get(id=select2)
+        menupack=Menupack.objects.get(price=select2)
+        amount=request.POST.get('amount')
 
-        bookings=Eventbooking(eventname=eventname,date=date,time=time,venue=venue,people=people,eventpack=eventpack,menupack=menupack,user=user)
+        bookings=Eventbooking(eventname=eventname,date=date,time=time,venue=venue,people=people,eventpack=eventpack,menupack=menupack,user=user,amount=amount)
         bookings.save()
         messages.warning(request,'Your Booking request is received,please wait for confirmation')
         return redirect('userhome')

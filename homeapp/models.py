@@ -69,7 +69,11 @@ class Eventbooking(models.Model):
     user=models.ForeignKey(CustomerModel,on_delete=models.CASCADE)
     eventpack=models.ForeignKey(Eventpack,on_delete=models.CASCADE)
     menupack=models.ForeignKey(Menupack,on_delete=models.CASCADE)
+    amount=models.CharField(max_length=255)
     approved=models.BooleanField(default=False)
+    completed=models.BooleanField(default=False)
+    reason=models.CharField(max_length=255,blank=True,null=True)
+    feedback=models.CharField(max_length=255,blank=True,null=True)
 
     def __str__(self):
         return self.eventname
