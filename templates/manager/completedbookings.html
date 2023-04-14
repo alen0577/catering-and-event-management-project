@@ -1,9 +1,9 @@
 {% extends 'manager/base.html' %}
 {% load static %}
-
 {% block title %}
-Add Food Items
-{% endblock title %}
+Completed Bookings
+{% endblock %}
+
 
 
 {% block body %}
@@ -72,10 +72,10 @@ Add Food Items
         margin-left: 0;
       }
     }
-  </style>
+</style>
   
   
-  <div class="sidebar fixed-top">
+<div class="sidebar">
     <!-- <button class="toggle-btn"></button> -->
     <ul>
   
@@ -103,60 +103,89 @@ Add Food Items
   
   
     </ul>
-  </div>
+</div>
   
   
   
-  <div class="main-content">
-    <section id="section1">
-      <div class="container"><br><br>
-        <div class="row">
-          <h3 class="text-center">Add Food Dishes </h3><br>
-          <div class="col-12">
+<div class="main-content">
 
-            <form method="post" action="{% url 'addproduct' %}" enctype="multipart/form-data" class="needs-validation" novalidate>
-              {% csrf_token %}
-              <input style="background-color: rgb(255, 255, 255);" type="text" name="pname" class="form-control mb-3" placeholder="Enter Dish Name" required>
-              <input style="background-color: rgb(255, 255, 255);" type="text" name="pdes" class="form-control mb-3" placeholder="Enter Description" required>
-              <input style="background-color: rgb(255, 255, 255);" type="number" name="pprice" class="form-control mb-3" placeholder="Enter Price" required>
-              <input style="background-color: rgb(255, 255, 255);" type="number" name="pqty" class="form-control mb-3" placeholder="Enter Quantity" required>
-              <input style="background-color: rgb(255, 255, 255);" type="file" name="pimg" class="form-control mb-3" required>
+  <section id="section1">
+    <div class="container">
+      <div class="row"><br><br>
+        <h3 class="text-center">Events Completed</h3><br><br><br>
+        <div class="col-12">
+
+          <div class="table-responsive">
+
+
+            <table class="table  align-middle" style="background-color: rgb(5, 12, 69);color: white;">
+              <thead>
+                  <tr>
+                      <th>USERNAME</th>
+                      <th>EVENT NAME</th>
+                      <th>DATE</th>
+                      <th>TIME</th>
+                      <th>COUNT</th>
+                      <th>AMOUNT</th>
+                      <th>STATUS</th>
+                      
+                      
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for p in completedbookings %}
+                  <tr>
+                      <td>{{ p.user.customer.username}}</td>
+                      <td>{{ p.eventname}}</td>
+                      <td>{{ p.date}}</td>
+                      <td>{{ p.time}}</td>
+                      <td>{{ p.people}}</td>
+                      <td>{{ p.amount}}/-</td>
+
+
+                      <!-- <td>
+                                    
+                        <label class="btn" style="color: green;" >Approved</label>
+                        
+                        <a href=""><button class="btn btn-warning">Delete</button></a>
+                        
+                      </td> -->
+
+                      <td>
+                        <a href=""><button class="btn btn-success">Completed</button></a>
+                      </td>
+                  </tr>
               
-  
-              <!-- <input type="date" name="joindate" class="form-control mt-3 mb-3" placeholder="Enter Joining Date"> -->
-  
-              <select style="background-color: rgb(255, 255, 255);" class="form-control form-select mb-3" name="select" id="qwerty" required>
-                  {% for i in category %}
-   
-                  <option value="{{ i.id }}">{{ i.category_name }}</option>
-  
                   {% endfor %}
-              </select>
+              </tbody> 
+            </table>
   
   
-              <button type="submit" class="btn mb-3" style="background-color: rgb(5, 12, 69); color: white;margin-bottom: 20px;">Submit</button>
-           </form>
-
-
+  
+  
+  
           </div>
+  
+  
         </div>
       </div>
-    </section>
-  
-
-
-
-
-
-
-  {% include 'home/login.html' %}  
-  {% include 'manager/category.html' %}
-  {% include 'manager/eventpacks.html' %}
-  {% include 'manager/menupacks.html' %}
+    </div>
+  </section>
       
-          
-   
-  </div>
+
+                      
+
+  
+        
+
+
+{% include 'home/login.html' %}  
+{% include 'manager/category.html' %}
+{% include 'manager/eventpacks.html' %}
+{% include 'manager/menupacks.html' %}
+
+</div>
   
 
 
@@ -171,29 +200,43 @@ Add Food Items
 
 
 
-<script>
 
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
-(() => {
-  'use strict'
+{% for message in messages %}
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation')
+  {% if message.tags == 'success' %}
+  <script>
+    var m="{{message}}";
+    swal("Success!",m, "success")
+  </script>
 
-  // Loop over them and prevent submission
-  Array.from(forms).forEach(form => {
-    form.addEventListener('submit', event => {
-      if (!form.checkValidity()) {
-        event.preventDefault()
-        event.stopPropagation()
-      }
+  <!-- modal show -->
+  <!-- <script>
+      $(document).ready(function() {
+          $("#loginmodal").modal('show');
+      });
+  </script> -->
+  
 
-      form.classList.add('was-validated')
-    }, false)
-  })
-})()
-</script>
+  {% elif message.tags == 'error' %}
+  <script>
+    var m="{{message}}";
+    swal("Denied..!",m, "error")
+  </script>
 
+  {% else %}
+  
+  <script>
+    var m="{{message}}";
+    swal("Deleted..!",m, "info")
+  </script>
+  
+
+  {% endif %}
+
+
+{% endfor %}
 <!-- <script>
   var toggleBtn = document.querySelector('.toggle-btn');
   var sidebar = document.querySelector('.sidebar');
@@ -202,6 +245,9 @@ Add Food Items
     sidebar.classList.toggle('active');
   });
 </script> -->
+
+
+
 
 
 {% endblock %}

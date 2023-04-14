@@ -491,7 +491,7 @@ def addmenupacks(request):
 def eventrequest(request):
     if not request.user.is_staff:
         return redirect('/login')
-    pendingbookings=Eventbooking.objects.filter(approved=False)
+    pendingbookings=Eventbooking.objects.filter(approved=False, completed=False)
     context={'pendingbookings':pendingbookings}
     return render(request,'manager/request.html',context) 
 
@@ -500,7 +500,7 @@ def eventrequest(request):
 def approvedbookings(request):
     if not request.user.is_staff:
         return redirect('/login')
-    approvedbookings=Eventbooking.objects.filter(approved=True)
+    approvedbookings=Eventbooking.objects.filter(approved=True, completed=False)
     context={'approvedbookings':approvedbookings}
     return render(request,'manager/approve.html',context)
 
@@ -544,4 +544,25 @@ def deletemenu(request,pk):
     menus.delete()
     messages.success(request,'rejected')
     return redirect('adminhome')
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def completedbookings(request):
+    if not request.user.is_staff:
+        return redirect('/login')
+    completedbookings=Eventbooking.objects.filter(completed=True)
+    context={'completedbookings':completedbookings}
+    return render(request,'manager/completedbookings.html',context)
+
+@login_required(login_url='/login')
+@cache_control(no_cache=True,must_revalidate=True,no_store=True)
+def complete(request, pk):
+    if not request.user.is_staff:
+        return redirect('/login')
+    booking = Eventbooking.objects.get(id=pk)
+    booking.completed = True
+    booking.save()
+    messages.success(request,'This Event is completed')
+    return redirect('approvedbookings')
+
 

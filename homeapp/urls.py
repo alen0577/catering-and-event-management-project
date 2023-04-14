@@ -50,6 +50,8 @@ urlpatterns = [
     path('reject/<int:pk>',views.reject,name='reject'),
     path('delete_event/<int:pk>',views.deleteevent,name='deleteevent'),
     path('delete_menu/<int:pk>',views.deletemenu,name='deletemenu'),
+    path('completedbookings/',views.completedbookings,name='completedbookings'),
+    path('complete/<int:pk>',views.complete,name='complete'),
 
 
 

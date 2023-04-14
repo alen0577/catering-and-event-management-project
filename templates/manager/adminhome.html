@@ -93,6 +93,8 @@ Royal Events-Admin_Home
 
     <li class="menu-item"><a href="{% url 'eventrequest' %}">Event Requests</a></li>
     <li class="menu-item"><a href="{% url 'approvedbookings' %}">Approved Events</a></li>
+    <li class="menu-item"><a href="{% url 'completedbookings' %}">Completed Events</a></li>
+
     <li class="menu-item"><a href="{% url 'showusr' %}">Customers</a></li>
 
     {% if user.is_authenticated %}
@@ -129,7 +131,7 @@ Royal Events-Admin_Home
                         <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Amount</th>
+                            <th>Amount/person</th>
                             <th>Action</th>
 
                           

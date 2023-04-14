@@ -90,6 +90,8 @@ Booking Requests
   
       <li class="menu-item"><a href="{% url 'eventrequest' %}">Event Requests</a></li>
       <li class="menu-item"><a href="{% url 'approvedbookings' %}">Approved Events</a></li>
+      <li class="menu-item"><a href="{% url 'completedbookings' %}">Completed Events</a></li>
+
       <li class="menu-item"><a href="{% url 'showusr' %}">Customers</a></li>
   
       {% if user.is_authenticated %}
@@ -124,6 +126,7 @@ Booking Requests
                       <th>DATE</th>
                       <th>TIME</th>
                       <th>COUNT</th>
+                      <th>AMOUNT</th>
                       <th>ACTION</th>
                       
                       
@@ -137,6 +140,7 @@ Booking Requests
                       <td>{{ p.date}}</td>
                       <td>{{ p.time}}</td>
                       <td>{{ p.people}}</td>
+                      <td>{{ p.amount}}/-</td>
                       
                       
                          
