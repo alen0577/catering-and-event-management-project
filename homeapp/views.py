@@ -137,7 +137,9 @@ def profile(request):
     if request.user.is_staff:
         return redirect('/login')
     customer=CustomerModel.objects.get(customer=request.user)
-    return render(request,'user/profile.html',{'customer':customer})
+    event=Eventpack.objects.all()
+    menu=Menupack.objects.all()
+    return render(request,'user/profile.html',{'customer':customer,'menu':menu,'event':event})
 
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
@@ -193,7 +195,9 @@ def cart(request):
     user_id=request.user.id
     user1=CustomerModel.objects.get(customer=user_id)
     cartitems=CartModel.objects.filter(user=user1)
-    context={'cartitems': cartitems}
+    event=Eventpack.objects.all()
+    menu=Menupack.objects.all()
+    context={'cartitems': cartitems,'event':event,'menu':menu}
     return render(request,'user/cart.html',context)
 
 
@@ -278,7 +282,10 @@ def bookinglist(request):
     user_id=request.user.id
     user1=CustomerModel.objects.get(customer=user_id)
     bookinglist=Eventbooking.objects.filter(user=user1)
-    context={'bookinglist':bookinglist}
+    event=Eventpack.objects.all()
+    menu=Menupack.objects.all()
+
+    context={'bookinglist':bookinglist,'event':event,'menu':menu}
     return render(request,'user/bookinglist.html',context)
 
 @login_required(login_url='/login')
@@ -297,14 +304,16 @@ def deleteevent(request,pk):
 def packages(request):
     if request.user.is_staff:
         return redirect('/login')
-    events=Eventpack.objects.all()
-    menus=Menupack.objects.all()
-    context={'events':events, 'menus':menus}
+    event=Eventpack.objects.all()
+    menu=Menupack.objects.all()
+    context={'event':event, 'menu':menu}
     return render(request,'user/packages.html',context)
 
 @login_required(login_url='/login')
 @cache_control(no_cache=True,must_revalidate=True,no_store=True)
 def feedback(request, pk):
+    if request.user.is_staff:
+        return redirect('/login')
     if request.method=='POST':
         feedback=request.POST.get('feedback')
         events=Eventbooking.objects.get(id=pk)
