@@ -293,8 +293,8 @@ def bookinglist(request):
 def deleteevent(request,pk):
     if request.user.is_staff:
         return redirect('/login')
-    eventitem=Eventbooking.objects.get(id=pk)
-    eventitem.delete()
+    bookinglist=Eventbooking.objects.filter(id=pk)
+    bookinglist.delete()
     messages.warning(request,'Deleted')
     return redirect('userhome')
 
@@ -320,6 +320,7 @@ def feedback(request, pk):
         events.completed=True
         events.feedback=feedback
         events.save()
+        messages.success(request,'Submitted')
         return redirect('userhome')
     return render(request,'user/feedback.html')
 
@@ -546,7 +547,7 @@ def reject(request, pk):
         events.approved=False
         events.reason=reason
         events.save()
-        return redirect('adminhome')
+        return redirect('eventrequest')
     return render(request,'manager/rejectreason.html')
     
 
@@ -560,7 +561,7 @@ def deleteevent(request,pk):
         return redirect('/login')
     events=Eventpack.objects.get(id=pk)
     events.delete()
-    messages.success(request,'rejected')
+    messages.success(request,'---')
     return redirect('adminhome')
 
 @login_required(login_url='/login')
@@ -570,7 +571,7 @@ def deletemenu(request,pk):
         return redirect('/login')
     menus=Menupack.objects.get(id=pk)
     menus.delete()
-    messages.success(request,'rejected')
+    messages.success(request,'---')
     return redirect('adminhome')
 
 @login_required(login_url='/login')

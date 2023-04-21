@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Edit Product
+Edit Dishes
 {% endblock title %}
 
 
@@ -116,7 +116,9 @@ Edit Product
     <div class="container"><br><br>
       <div class="row">
         <h3 class="text-center">Edit Dishes</h3>
-        <div class="col-12">
+
+        <div class="col-2"></div>
+        <div class="col-8">
 
           <form method="post" action="{% url 'update' product.id %}" enctype="multipart/form-data" >
             {% csrf_token %}
@@ -126,7 +128,7 @@ Edit Product
             <input type="number" name="pqty" class="form-control mb-3" value="{{product.pqty}}" style="color: rgb(5, 12, 69);" placeholder="Enter Quantity">
            
             {% if product.pimg %}
-            <img id="a1" src="{{product.pimg.url}}" style="width: 200px;margin-left:5px;height: 175px;" alt="">
+            <img id="a1" src="{{product.pimg.url}}" style="width: 170px;margin-left:5px;height: 150px;" alt="">
             <input type="file" name="pimg" style="color: rgb(5, 12, 69);" accept="image/*"><br><br>
             {% endif %}
             
@@ -155,6 +157,7 @@ Edit Product
 
 
         </div>
+        <div class="col-2"></div>
       </div>
     </div>
   </section>

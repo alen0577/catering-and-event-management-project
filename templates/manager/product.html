@@ -113,8 +113,13 @@ Add Dishes
     <section id="section1">
       <div class="container"><br><br>
         <div class="row">
-          <h3 class="text-center">Add Food Dishes </h3><br>
-          <div class="col-12">
+          <h3 class="text-center">Add  Dishes </h3><br><br>
+
+          <div class="col-2">
+
+          </div>
+
+          <div class="col-8">
 
             <form method="post" action="{% url 'addproduct' %}" enctype="multipart/form-data" class="needs-validation" novalidate>
               {% csrf_token %}
@@ -141,6 +146,7 @@ Add Dishes
 
 
           </div>
+          <div class="col-2"></div>
         </div>
       </div>
     </section>

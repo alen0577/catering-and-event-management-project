@@ -150,7 +150,7 @@ Approved Bookings
 
                       <td>
                                     
-                        <label  style="color: green;" >Approved</label>
+                        <label  style="color: rgb(6, 214, 6);" >Approved</label>
                         
                         <!-- <a href=""><button class="btn btn-warning">Delete</button></a> -->
                         
@@ -158,7 +158,7 @@ Approved Bookings
 
                       <td>
                         {% if p.completed %}
-                        <label  style="color: green;" >completed</label>
+                        <label  style="color: rgb(6, 214, 6);" >completed</label>
                         {% else %}
                         <a href="{% url 'complete' p.id %}"><button class="btn btn-success">Complete</button></a>
                         {% endif %}
