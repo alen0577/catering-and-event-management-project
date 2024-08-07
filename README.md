@@ -21,7 +21,7 @@ User module:
 
 ![Cart](https://github.com/alen0577/catering-and-event-management-project/assets/96831425/e4904a4c-03be-4755-9564-4a9f3ac87a75)
 
-Amin module:
+Admin module:
 
 ![Royal-Events-Admin_Home](https://github.com/alen0577/catering-and-event-management-project/assets/96831425/851f08f3-7aeb-4098-96b5-50d0a44a8c80)
 
